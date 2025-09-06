@@ -29,6 +29,7 @@ if "--os" in sys.argv:
             print("")
 
     from importlib.metadata import version
+
     import requests
     from packaging import version
 

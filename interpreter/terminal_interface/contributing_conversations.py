@@ -1,9 +1,9 @@
 import json
 import os
 import time
+from importlib.metadata import PackageNotFoundError, version
 from typing import List, TypedDict
 
-from importlib.metadata import version, PackageNotFoundError
 import requests
 
 from interpreter.terminal_interface.profiles.profiles import write_key_to_profile

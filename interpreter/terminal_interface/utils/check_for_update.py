@@ -1,6 +1,6 @@
-from importlib.metadata import version, PackageNotFoundError
-import requests
+from importlib.metadata import PackageNotFoundError, version
 
+import requests
 
 
 def check_for_update():

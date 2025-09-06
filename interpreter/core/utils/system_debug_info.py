@@ -1,8 +1,7 @@
 import platform
 import subprocess
+from importlib.metadata import PackageNotFoundError, distributions, version
 
-from importlib.metadata import version, PackageNotFoundError
-from importlib.metadata import distributions
 import psutil
 import toml
 
@@ -58,8 +57,7 @@ def get_package_mismatches(file_path="pyproject.toml"):
     dependencies.update(dev_dependencies)
 
     installed_packages = {
-        dist.metadata["Name"].lower(): dist.version
-        for dist in distributions()
+        dist.metadata["Name"].lower(): dist.version for dist in distributions()
     }
     mismatches = []
     for package, version_info in dependencies.items():
