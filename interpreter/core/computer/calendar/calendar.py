@@ -173,9 +173,9 @@ class Calendar:
         if platform.system() != "Darwin":
             return "This method is only supported on MacOS"
 
-        # Format datetime for AppleScript
-        applescript_start_date = start_date.strftime("%B %d, %Y %I:%M:%S %p")
-        applescript_end_date = end_date.strftime("%B %d, %Y %I:%M:%S %p")
+        # Format datetime for AppleScript - prepared for future AppleScript integration
+        _applescript_start_date = start_date.strftime("%B %d, %Y %I:%M:%S %p")
+        _applescript_end_date = end_date.strftime("%B %d, %Y %I:%M:%S %p")
 
         # If there is no calendar, lets use the first calendar applescript returns. This should probably be modified in the future
         if calendar is None:

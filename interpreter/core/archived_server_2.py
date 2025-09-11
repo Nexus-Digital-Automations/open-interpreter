@@ -18,9 +18,9 @@ import json
 # from beeper import Beeper
 import time
 import traceback
-from typing import Any, Dict, List
+from typing import Any, Dict
 
-from fastapi import FastAPI, Header, WebSocket
+from fastapi import FastAPI, WebSocket
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from uvicorn import Config, Server

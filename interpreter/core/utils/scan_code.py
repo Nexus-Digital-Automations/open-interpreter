@@ -5,7 +5,8 @@ from .temporary_file import cleanup_temporary_file, create_temporary_file
 
 try:
     from yaspin import yaspin
-    from yaspin.spinners import Spinners
+
+    # from yaspin.spinners import Spinners  # Commented out - unused import
 except ImportError:
     pass
 
@@ -34,7 +35,9 @@ def scan_code(code, language, interpreter):
         # pinned to an old semgrep version that has issues with reading the semgrep registry
         # while scanning a single file like the temporary one we generate
         # if guarddog solves [#249](https://github.com/DataDog/guarddog/issues/249) we can change this approach a bit
-        with yaspin(text="  Scanning code...").green.right.binary as loading:
+        with yaspin(
+            text="  Scanning code..."
+        ).green.right.binary as _loading:  # Intentionally unused - spinner UI
             scan = subprocess.run(
                 f"cd {temp_path} && semgrep scan --config auto --quiet --error {file_name}",
                 shell=True,

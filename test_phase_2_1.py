@@ -747,7 +747,9 @@ class Phase21TestSuite:
 
                 # Test 5.1: API response times
                 start_time = time.time()
-                health_response = await client.get(f"{self.base_url}/health")
+                _health_response = await client.get(
+                    f"{self.base_url}/health"
+                )  # Response intentionally unused - only testing response time
                 health_time = time.time() - start_time
 
                 self.test_assert(

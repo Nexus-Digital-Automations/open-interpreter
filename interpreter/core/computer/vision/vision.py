@@ -6,8 +6,6 @@ import tempfile
 
 from PIL import Image
 
-from ...utils.lazy_import import lazy_import
-from ..utils.computer_vision import pytesseract_get_text
 
 # transformers = lazy_import("transformers") # Doesn't work for some reason! We import it later.
 

@@ -20,7 +20,7 @@ if "--os" in sys.argv:
             else:
                 try:
                     rich_print(Markdown(line))
-                except UnicodeEncodeError as e:
+                except UnicodeEncodeError as _e:
                     # Replace the problematic character or handle the error as needed
                     print("Error displaying line:", line)
 
@@ -28,18 +28,18 @@ if "--os" in sys.argv:
             # Aesthetic choice. For these tags, they need a space below them
             print("")
 
-    from importlib.metadata import version
+    from importlib.metadata import version as metadata_version
 
     import requests
     from packaging import version
 
     def check_for_update():
         # Fetch the latest version from the PyPI API
-        response = requests.get(f"https://pypi.org/pypi/open-interpreter/json")
+        response = requests.get("https://pypi.org/pypi/open-interpreter/json")
         latest_version = response.json()["info"]["version"]
 
         # Get the current version using importlib.metadata
-        current_version = version("open-interpreter")
+        current_version = metadata_version("open-interpreter")
 
         return version.parse(latest_version) > version.parse(current_version)
 
@@ -58,6 +58,15 @@ if "--os" in sys.argv:
 from .core.async_core import AsyncInterpreter
 from .core.computer.terminal.base_language import BaseLanguage
 from .core.core import OpenInterpreter
+
+# Expose classes for public API
+__all__ = [
+    "AsyncInterpreter",
+    "BaseLanguage",
+    "OpenInterpreter",
+    "interpreter",
+    "computer",
+]
 
 interpreter = OpenInterpreter()
 computer = interpreter.computer

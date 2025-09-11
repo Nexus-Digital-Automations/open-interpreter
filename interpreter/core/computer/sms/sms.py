@@ -4,7 +4,6 @@ import plistlib
 import sqlite3
 import subprocess
 import sys
-import time
 
 
 class SMS:
@@ -97,7 +96,7 @@ LEFT JOIN handle ON message.handle_id = handle.ROWID
                         readable_messages.append(
                             {"date": date, "from": sender, "text": text}
                         )
-            except sqlite3.Error as e:
+            except sqlite3.Error:
                 break
 
         conn.close()

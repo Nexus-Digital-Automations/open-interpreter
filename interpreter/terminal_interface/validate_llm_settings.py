@@ -4,16 +4,11 @@ I guess it's setting up the model. So maybe this should be like, interpreter.llm
 """
 
 import os
-import subprocess
 import time
 
 os.environ["LITELLM_LOCAL_MODEL_COST_MAP"] = "True"
-import litellm
 from prompt_toolkit import prompt
 
-from interpreter.terminal_interface.contributing_conversations import (
-    contribute_conversation_launch_logic,
-)
 
 
 def validate_llm_settings(interpreter):

@@ -286,7 +286,7 @@ def main():
             )
             history += f"\nThe last command, {last_command}, resulted in this output:\n{last_command_output}"
 
-        except Exception as e:
+        except Exception:
             raise
             print(
                 "Failed to retrieve and run the last command from terminal history. Exiting."

@@ -21,14 +21,24 @@ from .core import OpenInterpreter
 last_start_time = 0
 
 try:
-    import janus
     import uvicorn
     from fastapi import APIRouter, FastAPI, File, Form, Request, UploadFile, WebSocket
     from fastapi.responses import JSONResponse, PlainTextResponse, StreamingResponse
     from starlette.status import HTTP_403_FORBIDDEN
-except:
+
+    FASTAPI_AVAILABLE = True
+except ImportError:
     # Server dependencies are not required by the main package.
-    pass
+    FASTAPI_AVAILABLE = False
+    FastAPI = None
+    APIRouter = None
+
+try:
+    import janus
+
+    JANUS_AVAILABLE = True
+except ImportError:
+    JANUS_AVAILABLE = False
 
 
 complete_message = {"role": "server", "type": "status", "content": "complete"}
@@ -1569,6 +1579,11 @@ class Server:
     DEFAULT_PORT = 8000
 
     def __init__(self, async_interpreter, host=None, port=None):
+        if not FASTAPI_AVAILABLE:
+            raise ImportError(
+                "FastAPI is required for server functionality. Install with: pip install fastapi uvicorn"
+            )
+
         self.app = FastAPI()
         router = create_router(async_interpreter)
         self.authenticate = authenticate_function

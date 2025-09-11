@@ -1,0 +1,157 @@
+{
+  "project": "unknown",
+  "tasks": [
+    {
+      "id": "error_1757387344791_sq34kmeld",
+      "title": "Fix remaining browser-use integration errors and complete setup",
+      "description": "Complete Python setup for browser-use package, resolve import errors, fix configuration issues, ensure Chrome/Chromium drivers work, fix API integration with AIgent system, and validate basic browser automation functionality",
+      "priority": "medium",
+      "category": "error",
+      "status": "in_progress",
+      "dependencies": [],
+      "important_files": [
+        "/Users/jeremyparker/Desktop/Claude Coding Projects/AIgent/browser-use/pyproject.toml",
+        "/Users/jeremyparker/Desktop/Claude Coding Projects/AIgent/browser-use/browser_use/__init__.py",
+        "/Users/jeremyparker/Desktop/Claude Coding Projects/AIgent/browser-use/config/",
+        "/Users/jeremyparker/Desktop/Claude Coding Projects/AIgent/browser-use/examples/getting_started/01_basic_search.py"
+      ],
+      "success_criteria": [],
+      "estimate": "",
+      "requires_research": false,
+      "subtasks": [],
+      "created_at": "2025-09-09T03:09:04.791Z",
+      "auto_research_created": false,
+      "assigned_agent": "development_session_1757468189452_1_general_f9e60147",
+      "started_at": "2025-09-10T01:37:18.982Z",
+      "claimed_by": "development_session_1757468189452_1_general_f9e60147",
+      "agent_assignment_history": [
+        {
+          "agentId": "development_session_1757468189452_1_general_f9e60147",
+          "role": "primary",
+          "assignedAt": "2025-09-10T01:37:18.982Z",
+          "reassignReason": null,
+          "claimPriority": "normal"
+        }
+      ]
+    },
+    {
+      "id": "error_1757387276965_7e33q8k8b",
+      "title": "Fix all ESLint and TypeScript compilation errors in bytebotd desktop automation package",
+      "description": "Comprehensive error resolution in bytebotd package: Run ESLint to identify all violations, fix TypeScript unsafe assignments and type errors, resolve CUA integration issues, fix performance and memory warnings, ensure cross-platform compatibility for desktop automation code. Target critical files in src/, computer-use/, services/, and cua-integration/ directories.",
+      "priority": "medium",
+      "category": "error",
+      "status": "in_progress",
+      "dependencies": [],
+      "important_files": [
+        "bytebot/packages/bytebotd/src/",
+        "bytebot/packages/bytebotd/src/computer-use/",
+        "bytebot/packages/bytebotd/src/services/",
+        "bytebot/packages/bytebotd/src/cua-integration/"
+      ],
+      "success_criteria": [],
+      "estimate": "",
+      "requires_research": false,
+      "subtasks": [],
+      "created_at": "2025-09-09T03:07:56.965Z",
+      "auto_research_created": false,
+      "assigned_agent": "development_session_1757387037456_1_general_9d26c624",
+      "started_at": "2025-09-09T03:08:54.744Z",
+      "claimed_by": "development_session_1757387037456_1_general_9d26c624",
+      "agent_assignment_history": [
+        {
+          "agentId": "development_session_1757387037456_1_general_9d26c624",
+          "role": "primary",
+          "assignedAt": "2025-09-09T03:08:54.744Z",
+          "reassignReason": null,
+          "claimPriority": "normal"
+        }
+      ]
+    }
+  ],
+  "agents": {
+    "development_session_1757387086468_1_general_2581815d": {
+      "name": "development Agent",
+      "role": "development",
+      "specialization": [],
+      "status": "active",
+      "assignedTasks": [],
+      "lastHeartbeat": "2025-09-09T03:04:46.469Z",
+      "parentAgentId": null,
+      "capabilities": [
+        "file-operations",
+        "linting",
+        "testing",
+        "build-fixes",
+        "refactoring"
+      ],
+      "workload": 0,
+      "maxConcurrentTasks": 5,
+      "createdAt": "2025-09-09T03:04:46.469Z",
+      "sessionId": "session_1757387086468",
+      "metadata": {}
+    },
+    "development_session_1757387179776_1_general_357612fc": {
+      "name": "development Agent",
+      "role": "development",
+      "specialization": [],
+      "status": "active",
+      "assignedTasks": [],
+      "lastHeartbeat": "2025-09-09T03:06:19.777Z",
+      "parentAgentId": null,
+      "capabilities": [
+        "file-operations",
+        "linting",
+        "testing",
+        "build-fixes",
+        "refactoring"
+      ],
+      "workload": 0,
+      "maxConcurrentTasks": 5,
+      "createdAt": "2025-09-09T03:06:19.777Z",
+      "sessionId": "session_1757387179776",
+      "metadata": {}
+    },
+    "development_session_1757468189452_1_general_f9e60147": {
+      "name": "development Agent",
+      "role": "development",
+      "specialization": [],
+      "status": "active",
+      "assignedTasks": [],
+      "lastHeartbeat": "2025-09-10T01:36:29.454Z",
+      "parentAgentId": null,
+      "capabilities": [
+        "file-operations",
+        "linting",
+        "testing",
+        "build-fixes",
+        "refactoring"
+      ],
+      "workload": 0,
+      "maxConcurrentTasks": 5,
+      "createdAt": "2025-09-10T01:36:29.454Z",
+      "sessionId": "session_1757468189452",
+      "metadata": {}
+    }
+  },
+  "settings": {
+    "auto_sort_enabled": true,
+    "sort_criteria": {
+      "primary": "category",
+      "secondary": "created_at"
+    },
+    "priority_values": {
+      "critical": 4,
+      "high": 3,
+      "medium": 2,
+      "low": 1
+    },
+    "category_enabled": true,
+    "category_ranks": {
+      "error": 1,
+      "feature": 2,
+      "subtask": 3,
+      "test": 4
+    }
+  },
+  "current_mode": "DEVELOPMENT"
+}

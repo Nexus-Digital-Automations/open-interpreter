@@ -11,7 +11,6 @@ import torch
 from PIL import Image, ImageDraw, ImageEnhance, ImageFont
 from sentence_transformers import SentenceTransformer, util
 
-from .....terminal_interface.utils.oi_dir import oi_dir
 from ...utils.computer_vision import pytesseract_get_text_bounding_boxes
 
 try:
@@ -449,7 +448,6 @@ fast_model = True
 model = SentenceTransformer("clip-ViT-B-32")
 
 
-import os
 
 import timm
 

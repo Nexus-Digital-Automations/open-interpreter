@@ -14,7 +14,6 @@ from .utils.local_storage_path import get_storage_path
 
 
 def conversation_navigator(interpreter):
-    import time
 
     conversations_dir = get_storage_path("conversations")
 

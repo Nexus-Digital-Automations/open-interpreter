@@ -273,14 +273,15 @@ class Mouse:
 
 
 import math
-import time
 
 
 def smooth_move_to(x, y, duration=2):
     start_x, start_y = pyautogui.position()
     dx = x - start_x
     dy = y - start_y
-    distance = math.hypot(dx, dy)  # Calculate the distance in pixels
+    _distance = math.hypot(
+        dx, dy
+    )  # Distance calculated but intentionally unused - may be used for future speed calculations
 
     start_time = time.time()
 

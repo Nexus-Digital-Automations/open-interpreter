@@ -1,5 +1,3 @@
-import io
-
 from ...utils.lazy_import import lazy_import
 
 # Lazy import of optional packages
@@ -14,7 +12,7 @@ pytesseract = lazy_import("pytesseract")
 
 def pytesseract_get_text(img):
     # List the attributes of pytesseract, which will trigger lazy loading of it
-    attributes = dir(pytesseract)
+    _attributes = dir(pytesseract)  # Intentionally unused - triggers lazy loading
     if pytesseract == None:
         raise ImportError("The pytesseract module could not be imported.")
 

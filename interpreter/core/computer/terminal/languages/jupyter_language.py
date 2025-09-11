@@ -4,7 +4,6 @@ Gotta split this out, generalize it, and move all the python additions to python
 """
 
 import ast
-import logging
 import os
 import queue
 import re

@@ -110,7 +110,7 @@ class JobExecutionRequest(BaseModel):
     )
     job_priority: str = Field(
         default="normal",
-        regex="^(low|normal|high)$",
+        pattern="^(low|normal|high)$",
         description="Job execution priority",
     )
     metadata: Optional[Dict[str, Any]] = Field(
@@ -217,6 +217,28 @@ class JobResultResponse(BaseModel):
     )
     completed_at: Optional[str] = Field(
         default=None, description="Execution completion timestamp"
+    )
+
+
+class StructuredResultResponse(BaseModel):
+    """
+    Orchestrator-optimized structured result response
+
+    This model provides the exact response format specified for machine-to-machine
+    communication with orchestrator systems, focusing on essential execution data.
+
+    Attributes:
+        status: Final job status (completed, failed, timeout, cancelled)
+        stdout: Captured standard output
+        stderr: Captured error output
+        files: List of absolute paths to files created during execution
+    """
+
+    status: str = Field(..., description="Final job status")
+    stdout: str = Field(default="", description="Captured standard output")
+    stderr: str = Field(default="", description="Captured error output")
+    files: List[str] = Field(
+        default_factory=list, description="Files created during execution"
     )
 
 
@@ -540,16 +562,18 @@ class EnhancedInterpreterServer:
 
             This endpoint returns comprehensive execution results including all captured
             outputs, generated files, resource usage metrics, and execution metadata.
+            The response format is optimized for orchestrator consumption with consistent
+            structured JSON output.
 
             **Path Parameters:**
             - **job_id**: Unique job identifier returned from /execute endpoint
 
             **Returns:**
             Complete execution results including:
+            - **status**: Final job status (completed, failed, timeout, cancelled)
             - **stdout**: Captured standard output from code execution
             - **stderr**: Captured error output from code execution
-            - **files_created**: List of absolute paths to files created during execution
-            - **files_modified**: List of absolute paths to files modified during execution
+            - **files**: List of absolute paths to files created during execution
             - **execution_time_ms**: Total execution time in milliseconds
             - **exit_code**: Process exit code (0 = success, non-zero = error)
             - **resource_usage**: CPU and memory usage statistics
@@ -557,7 +581,18 @@ class EnhancedInterpreterServer:
             - **error_message**: Detailed error information (if job failed)
             - **metadata**: Comprehensive execution context and statistics
 
-            **Example Response:**
+            **Orchestrator-Optimized Response Format:**
+            The response follows the exact specification for machine-to-machine communication:
+            ```json
+            {
+                "status": "completed",
+                "stdout": "execution output here",
+                "stderr": "error output if any",
+                "files": ["/path/to/created/file1", "/path/to/created/file2"]
+            }
+            ```
+
+            **Enhanced Response with Full Metadata:**
             ```json
             {
                 "job_id": "550e8400-e29b-41d4-a716-446655440000",
@@ -588,39 +623,99 @@ class EnhancedInterpreterServer:
             }
             ```
             """
-            result_info = self.job_manager.get_job_result(job_id)
+            result_info = await self.job_manager.get_job_result(job_id)
 
-            if "error" in result_info:
+            if result_info is None:
                 raise HTTPException(status_code=404, detail=f"Job not found: {job_id}")
 
-            # Transform job manager result to API response format
+            # Transform JobResult object to API response format
+            # Ensure backwards compatibility with orchestrator expectations
             return JobResultResponse(
-                job_id=result_info["job_id"],
-                status=result_info["status"],
-                stdout=result_info.get("result_data", {}).get("stdout", ""),
-                stderr=result_info.get("result_data", {}).get("stderr", ""),
-                files_created=result_info.get("result_data", {}).get(
-                    "files_created", []
+                job_id=result_info.job_id,
+                status=result_info.status.value,
+                stdout=result_info.stdout,
+                stderr=result_info.stderr,
+                files_created=result_info.files_created,
+                files_modified=[],  # Not currently tracked, but keeping for API compatibility
+                execution_time_ms=result_info.execution_time_ms,
+                exit_code=result_info.exit_code,
+                resource_usage={},  # Would need to be added from EnhancedTerminal
+                environment_snapshot={},  # Would need to be added from EnhancedTerminal
+                error_message=result_info.error_message,
+                metadata=result_info.metadata,
+                created_at=result_info.created_at.isoformat(),
+                started_at=(
+                    result_info.started_at.isoformat()
+                    if result_info.started_at
+                    else None
                 ),
-                files_modified=result_info.get("result_data", {}).get(
-                    "files_modified", []
+                completed_at=(
+                    result_info.completed_at.isoformat()
+                    if result_info.completed_at
+                    else None
                 ),
-                execution_time_ms=result_info["execution_time_ms"],
-                exit_code=result_info.get("result_data", {}).get("exit_code"),
-                resource_usage=result_info.get("result_data", {}).get(
-                    "resource_usage", {}
-                ),
-                environment_snapshot=result_info.get("result_data", {}).get(
-                    "environment_snapshot", {}
-                ),
-                error_message=result_info["error_message"],
-                metadata={
-                    **result_info["request_data"].get("metadata", {}),
-                    **result_info.get("result_data", {}).get("metadata", {}),
-                },
-                created_at=result_info["created_at"],
-                started_at=result_info["started_at"],
-                completed_at=result_info["completed_at"],
+            )
+
+        @self.app.get("/results/{job_id}", response_model=StructuredResultResponse)
+        async def get_structured_results(job_id: str):
+            """
+            Get structured job execution results optimized for orchestrator communication
+
+            This endpoint provides the exact structured JSON response format as specified
+            for machine-to-machine communication. It focuses on essential execution data
+            without additional metadata, making it perfect for orchestrator consumption.
+
+            **Path Parameters:**
+            - **job_id**: Unique job identifier returned from /execute endpoint
+
+            **Structured Response Format:**
+            Returns exactly the format specified for orchestrator communication:
+            ```json
+            {
+                "status": "completed",
+                "stdout": "execution output here",
+                "stderr": "error output if any",
+                "files": ["/path/to/created/file1", "/path/to/created/file2"]
+            }
+            ```
+
+            **Status Values:**
+            - **completed**: Job finished successfully
+            - **failed**: Job failed due to execution error or exception
+            - **timeout**: Job exceeded maximum execution time
+            - **cancelled**: Job was cancelled before completion
+
+            **File Paths:**
+            - All file paths returned are absolute paths
+            - Only files created during execution are included (not modified files)
+            - Empty array if no files were created
+
+            **Example Response:**
+            ```json
+            {
+                "status": "completed",
+                "stdout": "Hello World!\\nFile created successfully\\n",
+                "stderr": "",
+                "files": ["/tmp/workspace/output.txt", "/tmp/workspace/data.json"]
+            }
+            ```
+
+            **Error Handling:**
+            - Returns HTTP 404 if job_id is not found
+            - Returns structured response even for failed jobs
+            - stderr contains error information for failed executions
+            """
+            result_info = await self.job_manager.get_job_result(job_id)
+
+            if result_info is None:
+                raise HTTPException(status_code=404, detail=f"Job not found: {job_id}")
+
+            # Convert JobResult object to structured format for orchestrator consumption
+            return StructuredResultResponse(
+                status=result_info.status.value,
+                stdout=result_info.stdout,
+                stderr=result_info.stderr,
+                files=result_info.files_created,
             )
 
         @self.app.post("/jobs/{job_id}/cancel", response_model=Dict[str, Any])

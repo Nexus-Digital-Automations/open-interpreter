@@ -1,5 +1,4 @@
 import os
-import platform
 import signal
 import time
 from random import randint
@@ -18,9 +17,7 @@ interpreter = OpenInterpreter()
 
 import multiprocessing
 import threading
-import time
 
-import pytest
 from websocket import create_connection
 
 
@@ -105,7 +102,6 @@ def test_authenticated_acknowledging_breaking_server():
     import websockets
 
     async def test_fastapi_server():
-        import asyncio
 
         async with websockets.connect("ws://localhost:8000/") as websocket:
             # Connect to the websocket
@@ -253,7 +249,6 @@ def test_server():
     import websockets
 
     async def test_fastapi_server():
-        import asyncio
 
         async with websockets.connect("ws://localhost:8000/") as websocket:
             # Connect to the websocket

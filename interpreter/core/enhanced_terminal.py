@@ -34,7 +34,7 @@ from typing import Any, Dict, List, Optional
 
 import psutil
 
-from ..computer.terminal.terminal import Terminal
+from .computer.terminal.terminal import Terminal
 
 # Configure enhanced logging for terminal operations
 logger = logging.getLogger("interpreter.enhanced_terminal")

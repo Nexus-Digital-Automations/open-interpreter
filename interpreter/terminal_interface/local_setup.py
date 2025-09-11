@@ -319,7 +319,7 @@ def local_setup(interpreter, provider=None, model=None):
             interpreter.display_message(f"> Model set to `{model}`")
 
         # If Ollama is not installed or not recognized as a command, prompt the user to download Ollama and try again
-        except (subprocess.CalledProcessError, FileNotFoundError) as e:
+        except (subprocess.CalledProcessError, FileNotFoundError):
             print("Ollama is not installed or not recognized as a command.")
             time.sleep(1)
             interpreter.display_message(

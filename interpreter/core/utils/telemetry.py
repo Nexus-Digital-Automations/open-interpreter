@@ -9,12 +9,10 @@ Disable anonymous telemetry by execute one of below:
 based on ChromaDB's telemetry: https://github.com/chroma-core/chroma/tree/main/chromadb/telemetry/product
 """
 
-import contextlib
 import json
 import os
-import threading
 import uuid
-from importlib.metadata import PackageNotFoundError, version
+from importlib.metadata import version
 
 import requests
 

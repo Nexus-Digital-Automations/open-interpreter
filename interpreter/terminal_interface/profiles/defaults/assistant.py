@@ -1,8 +1,14 @@
 from interpreter import interpreter
 
+# Check for pyautogui availability for GUI control
 try:
-    import pyautogui
+    import importlib.util
+
+    _pyautogui_available = importlib.util.find_spec("pyautogui") is not None
 except ImportError:
+    _pyautogui_available = False
+
+if not _pyautogui_available:
     print(
         "Some actions may fail as OS dependencies are not installed. Please run 'pip install open-interpreter[os]' to install them."
     )

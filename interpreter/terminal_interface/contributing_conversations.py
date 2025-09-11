@@ -1,7 +1,7 @@
 import json
 import os
 import time
-from importlib.metadata import PackageNotFoundError, version
+from importlib.metadata import version
 from typing import List, TypedDict
 
 import requests
