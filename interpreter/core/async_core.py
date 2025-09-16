@@ -483,7 +483,7 @@ class AsyncInterpreter(OpenInterpreter):
             self.respond_thread.start()
 
     async def output(self):
-        if self.output_queue == None:
+        if self.output_queue is None:
             self.output_queue = janus.Queue()
         return await self.output_queue.async_q.get()
 
@@ -503,7 +503,7 @@ class AsyncInterpreter(OpenInterpreter):
             self.job_manager.update_job_status(job_id, JobStatus.RUNNING)
         for attempt in range(5):  # 5 attempts
             try:
-                if run_code == None:
+                if run_code is None:
                     run_code = self.auto_run
 
                 sent_chunks = False
@@ -1400,7 +1400,7 @@ def create_router(async_interpreter):
 
                 if (
                     chunk["type"] == "confirmation"
-                    and async_interpreter.auto_run == False
+                    and not async_interpreter.auto_run
                 ):
                     await asyncio.sleep(0)
                     output_content = "Do you want to run this code?"

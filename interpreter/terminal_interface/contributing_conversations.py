@@ -31,7 +31,7 @@ Want to contribute? Run `interpreter --model i` to use our free, hosted model. C
 
 def display_contributing_current_message():
     display_markdown_message(
-        f"""
+        """
 ---
 > This conversation will be used to train Open Interpreter's open-source language model.
 """

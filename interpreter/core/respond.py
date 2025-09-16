@@ -103,7 +103,7 @@ def respond(interpreter):
             except Exception as e:
                 error_message = str(e).lower()
                 if (
-                    interpreter.offline == False
+                    not interpreter.offline
                     and "auth" in error_message
                     or "api key" in error_message
                 ):
@@ -117,7 +117,7 @@ def respond(interpreter):
                     or "insufficient_quota" in str(e).lower()
                 ):
                     display_markdown_message(
-                        f""" > You ran out of current quota for OpenAI's API, please check your plan and billing details. You can either wait for the quota to reset or upgrade your plan.
+                        """ > You ran out of current quota for OpenAI's API, please check your plan and billing details. You can either wait for the quota to reset or upgrade your plan.
 
                         To check your current usage and billing details, visit the [OpenAI billing page](https://platform.openai.com/settings/organization/billing/overview).
 
@@ -126,7 +126,7 @@ def respond(interpreter):
                     )
 
                 elif (
-                    interpreter.offline == False and "not have access" in str(e).lower()
+                    not interpreter.offline and "not have access" in str(e).lower()
                 ):
                     """
                     Check for invalid model in error message and then fallback.
@@ -148,7 +148,7 @@ def respond(interpreter):
 
                     if response.strip().lower() == "y":
                         interpreter.llm.model = "i"
-                        interpreter.display_message(f"> Model set to `i`")
+                        interpreter.display_message("> Model set to `i`")
                         interpreter.display_message(
                             "***Note:*** *Conversations with this model will be used to train our open-source model.*\n"
                         )
@@ -255,7 +255,7 @@ def respond(interpreter):
                     continue
 
                 # Is this language enabled/supported?
-                if interpreter.computer.terminal.get_language(language) == None:
+                if interpreter.computer.terminal.get_language(language) is None:
                     output = f"`{language}` disabled or not supported."
 
                     yield {

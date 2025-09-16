@@ -50,7 +50,7 @@ class MarkdownStreamer:
         self.potential_marker += char
 
         # Code block
-        if char == "`" and not Style.CODE in self.active_styles:
+        if char == "`" and Style.CODE not in self.active_styles:
             self.code_fence_count += 1
             if self.code_fence_count == 3:
                 self.code_fence_count = 0

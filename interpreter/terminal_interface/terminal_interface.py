@@ -134,7 +134,7 @@ def terminal_interface(interpreter, message):
 
             if (
                 interpreter.llm.supports_vision
-                or interpreter.llm.vision_renderer != None
+                or interpreter.llm.vision_renderer is not None
             ):
                 # Is the input a path to an image? Like they just dragged it into the terminal?
                 image_path = find_image_path(message)
@@ -363,7 +363,7 @@ def terminal_interface(interpreter, message):
                         or ("format" in chunk and chunk["format"] == "javascript")
                     )
                 ):
-                    if (interpreter.os == True) and (interpreter.verbose == False):
+                    if (interpreter.os) and (not interpreter.verbose):
                         # We don't display things to the user in OS control mode, since we use vision to communicate the screen to the LLM so much.
                         # But if verbose is true, we do display it!
                         continue
@@ -439,7 +439,7 @@ def terminal_interface(interpreter, message):
                         active_block.active_line = chunk["content"]
 
                         # Display action notifications if we're in OS mode
-                        if interpreter.os and active_block.active_line != None:
+                        if interpreter.os and active_block.active_line is not None:
                             action = ""
 
                             code_lines = active_block.code.split("\n")
@@ -498,7 +498,7 @@ def terminal_interface(interpreter, message):
                                 elif action.startswith("computer.keyboard.press("):
                                     description = f"Pressing {arguments}."
                                 elif action == "computer.os.get_selected_text()":
-                                    description = f"Getting selected text."
+                                    description = "Getting selected text."
 
                                 if description:
                                     interpreter.computer.os.notify(description)

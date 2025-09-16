@@ -627,7 +627,7 @@ def main():
                         feedback = False
                     else:
                         feedback = None
-                    if feedback != None and not interpreter.contribute_conversation:
+                    if feedback is not None and not interpreter.contribute_conversation:
                         if interpreter.llm.model == "i":
                             contribute = "y"
                         else:

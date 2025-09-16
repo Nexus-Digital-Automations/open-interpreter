@@ -34,13 +34,13 @@ def handle_undo(self, arguments):
 
     # Print out a preview of what messages were removed.
     for message in removed_messages:
-        if "content" in message and message["content"] != None:
+        if "content" in message and message["content"] is not None:
             self.display_message(
                 f"**Removed message:** `\"{message['content'][:30]}...\"`"
             )
         elif "function_call" in message:
             self.display_message(
-                f"**Removed codeblock**"
+                "**Removed codeblock**"
             )  # TODO: Could add preview of code removed here.
 
     print("")  # Aesthetics.
@@ -206,7 +206,7 @@ def handle_count_tokens(self, prompt):
         )
 
     outputs.append(
-        f"**Note**: This functionality is currently experimental and may not be accurate. Please report any issues you find to the [Open Interpreter GitHub repository](https://github.com/OpenInterpreter/open-interpreter)."
+        "**Note**: This functionality is currently experimental and may not be accurate. Please report any issues you find to the [Open Interpreter GitHub repository](https://github.com/OpenInterpreter/open-interpreter)."
     )
 
     self.display_message("\n".join(outputs))

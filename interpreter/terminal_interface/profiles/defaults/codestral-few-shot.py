@@ -21,7 +21,7 @@ try:
 except Exception as e:
     print(str(e))
     interpreter.display_message(
-        f"> Ollama not found\n\nPlease download Ollama from [ollama.com](https://ollama.com/) to use `codestral`.\n"
+        "> Ollama not found\n\nPlease download Ollama from [ollama.com](https://ollama.com/) to use `codestral`.\n"
     )
     exit()
 

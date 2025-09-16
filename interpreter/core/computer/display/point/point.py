@@ -51,12 +51,12 @@ def point(description, screenshot=None, debug=False, hashes=None):
 def find_icon(description, screenshot=None, debug=False, hashes=None):
     if debug:
         print("STARTING")
-    if screenshot == None:
+    if screenshot is None:
         image_data = take_screenshot_to_pil()
     else:
         image_data = screenshot
 
-    if hashes == None:
+    if hashes is None:
         hashes = {}
 
     image_width, image_height = image_data.size
@@ -451,7 +451,7 @@ model = SentenceTransformer("clip-ViT-B-32")
 
 import timm
 
-if fast_model == False:
+if not fast_model:
     # Check if the model file exists
     if not os.path.isfile(model_path):
         # If not, create and save the model

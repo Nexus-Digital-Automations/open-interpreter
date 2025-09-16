@@ -28,6 +28,6 @@ interpreter.offline = False
 interpreter.auto_run = False
 
 # Custom Instructions
-interpreter.custom_instructions = f"""
+interpreter.custom_instructions = """
 
     """

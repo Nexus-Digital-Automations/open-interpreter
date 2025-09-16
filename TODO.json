@@ -2,6 +2,34 @@
   "project": "unknown",
   "tasks": [
     {
+      "id": "error_1757577531688_7ivedymms",
+      "title": "Complete elimination of remaining magic numbers in bytebot-ui package",
+      "description": "Extract ALL remaining magic numbers into properly named constants in existing /src/constants/ui.ts file. Target files with specific magic numbers: ComputerToolUtils.tsx (line 135: number 3), TaskList.tsx (line 19: number 5), TaskList.test.tsx (multiple: 1000, 10, 3, 4, 500, 100, 50, 1024), button.test.tsx (multiple: 50, 100, 10, 1024), copy-button.tsx (line 34: number 2000), desktop-container.tsx (lines 54, 67: numbers 1280, 960), dropdown-menu.tsx (line 63: number 4), loader.tsx (line 11: number 16), popover.tsx (line 15: number 4), setupAfterEnv.ts (extensive: 100, 50, 1024, 24, 60, 1000, 5000, 375, 768). Create logical groupings: TIMEOUTS, DIMENSIONS, TEST_VALUES, COMPONENT_SIZES with semantic naming.",
+      "priority": "medium",
+      "category": "error",
+      "status": "in_progress",
+      "dependencies": [],
+      "important_files": [],
+      "success_criteria": [],
+      "estimate": "",
+      "requires_research": false,
+      "subtasks": [],
+      "created_at": "2025-09-11T07:58:51.688Z",
+      "auto_research_created": false,
+      "assigned_agent": "development_session_1757577380602_1_general_19259308",
+      "started_at": "2025-09-11T07:59:08.945Z",
+      "claimed_by": "development_session_1757577380602_1_general_19259308",
+      "agent_assignment_history": [
+        {
+          "agentId": "development_session_1757577380602_1_general_19259308",
+          "role": "primary",
+          "assignedAt": "2025-09-11T07:59:08.945Z",
+          "reassignReason": null,
+          "claimPriority": "normal"
+        }
+      ]
+    },
+    {
       "id": "error_1757387344791_sq34kmeld",
       "title": "Fix remaining browser-use integration errors and complete setup",
       "description": "Complete Python setup for browser-use package, resolve import errors, fix configuration issues, ensure Chrome/Chromium drivers work, fix API integration with AIgent system, and validate basic browser automation functionality",

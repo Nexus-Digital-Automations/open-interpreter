@@ -13,7 +13,7 @@ pytesseract = lazy_import("pytesseract")
 def pytesseract_get_text(img):
     # List the attributes of pytesseract, which will trigger lazy loading of it
     _attributes = dir(pytesseract)  # Intentionally unused - triggers lazy loading
-    if pytesseract == None:
+    if pytesseract is None:
         raise ImportError("The pytesseract module could not be imported.")
 
     result = pytesseract.image_to_string(img)

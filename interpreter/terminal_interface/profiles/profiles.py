@@ -50,7 +50,7 @@ def profile(interpreter, filename_or_url):
             os.rename(profile_path, f"{base}_custom{extension}")
         profile = get_default_profile(filename_or_url)
 
-    if profile == None:
+    if profile is None:
         try:
             profile = get_profile(filename_or_url, profile_path)
         except:

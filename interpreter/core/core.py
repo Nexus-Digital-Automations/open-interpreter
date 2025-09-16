@@ -327,7 +327,7 @@ class OpenInterpreter:
                 # If active_line is None, we finished running code.
                 if (
                     chunk.get("format") == "active_line"
-                    and chunk.get("content", "") == None
+                    and chunk.get("content", "") is None
                 ):
                     # If output wasn't yet produced, add an empty output
                     if self.messages[-1]["role"] != "computer":
@@ -347,7 +347,7 @@ class OpenInterpreter:
                         yield {**last_flag_base, "end": True}
                         last_flag_base = None
 
-                    if self.auto_run == False:
+                    if not self.auto_run:
                         yield chunk
 
                     # We want to append this now, so even if content is never filled, we know that the execution didn't produce output.
