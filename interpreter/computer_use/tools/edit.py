@@ -99,7 +99,7 @@ class EditTool(BaseAnthropicTool):
         elif command == "undo_edit":
             return self.undo_edit(_path)
         raise ToolError(
-            f'Unrecognized command {command}. The allowed commands for '
+            f"Unrecognized command {command}. The allowed commands for "
             f'the {self.name} tool are: {", ".join(get_args(Command))}'
         )
 

@@ -223,43 +223,43 @@ class ParlantUnifiedSecurityFramework:
 
         try:
             # Code execution validator
-            self.domain_validators[ValidationDomain.CODE_EXECUTION] = (
-                ParlantCodeExecutionValidator(
-                    parlant_service=self.parlant_service,
-                    security_orchestrator=self.security_orchestrator,
-                    performance_target_ms=self.performance_target_ms,
-                    **config.get("code_execution", {}),
-                )
+            self.domain_validators[
+                ValidationDomain.CODE_EXECUTION
+            ] = ParlantCodeExecutionValidator(
+                parlant_service=self.parlant_service,
+                security_orchestrator=self.security_orchestrator,
+                performance_target_ms=self.performance_target_ms,
+                **config.get("code_execution", {}),
             )
 
             # File system validator
-            self.domain_validators[ValidationDomain.FILE_SYSTEM] = (
-                ParlantFileSystemValidator(
-                    parlant_service=self.parlant_service,
-                    security_orchestrator=self.security_orchestrator,
-                    performance_target_ms=self.performance_target_ms,
-                    **config.get("file_system", {}),
-                )
+            self.domain_validators[
+                ValidationDomain.FILE_SYSTEM
+            ] = ParlantFileSystemValidator(
+                parlant_service=self.parlant_service,
+                security_orchestrator=self.security_orchestrator,
+                performance_target_ms=self.performance_target_ms,
+                **config.get("file_system", {}),
             )
 
             # Terminal validator
-            self.domain_validators[ValidationDomain.TERMINAL_COMMAND] = (
-                ParlantTerminalValidator(
-                    parlant_service=self.parlant_service,
-                    security_orchestrator=self.security_orchestrator,
-                    performance_target_ms=self.performance_target_ms,
-                    **config.get("terminal", {}),
-                )
+            self.domain_validators[
+                ValidationDomain.TERMINAL_COMMAND
+            ] = ParlantTerminalValidator(
+                parlant_service=self.parlant_service,
+                security_orchestrator=self.security_orchestrator,
+                performance_target_ms=self.performance_target_ms,
+                **config.get("terminal", {}),
             )
 
             # LLM validator
-            self.domain_validators[ValidationDomain.LLM_INTERACTION] = (
-                ParlantLLMValidator(
-                    parlant_service=self.parlant_service,
-                    security_orchestrator=self.security_orchestrator,
-                    performance_target_ms=self.performance_target_ms,
-                    **config.get("llm", {}),
-                )
+            self.domain_validators[
+                ValidationDomain.LLM_INTERACTION
+            ] = ParlantLLMValidator(
+                parlant_service=self.parlant_service,
+                security_orchestrator=self.security_orchestrator,
+                performance_target_ms=self.performance_target_ms,
+                **config.get("llm", {}),
             )
 
             self.logger.info(

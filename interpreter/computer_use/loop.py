@@ -383,13 +383,7 @@ async def main():
                 response_chunks = []
 
                 async def output_callback(content_block: BetaContentBlock):
-                    chunk = f"data: {
-                        json.dumps(
-                            {
-                                'choices': [
-                                    {
-                                        'delta': {
-                                            'content': content_block.text}}]})}\n\n"
+                    chunk = f"data: {json.dumps({'choices': [{'delta': {'content': content_block.text}}]})}\n\n"
                     response_chunks.append(chunk)
                     yield chunk
 
@@ -438,9 +432,7 @@ async def main():
                     # print(f"Error: {e}")
                     # yield f"data: {json.dumps({'error': str(e)})}\n\n"
 
-            return StreamingResponse(
-                stream_response(), media_type="text/event-stream"
-            )
+            return StreamingResponse(stream_response(), media_type="text/event-stream")
 
         # Instead of running uvicorn here, we'll return the app
         return app

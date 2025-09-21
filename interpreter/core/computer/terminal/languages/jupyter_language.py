@@ -30,6 +30,7 @@ if "ipykernel_launcher" in sys.argv:
     app.launch_new_instance()
     sys.exit(0)
 
+
 class JupyterLanguage(BaseLanguage):
     file_extension = "py"
     name = "Python"
@@ -351,6 +352,7 @@ matplotlib.use('{backend}')
     def preprocess_code(self, code):
         return preprocess_python(code)
 
+
 def preprocess_python(code):
     """
     Add active line markers
@@ -379,6 +381,7 @@ def preprocess_python(code):
 
     return code
 
+
 def add_active_line_prints(code):
     """
     Add print statements indicating line numbers to a python string.
@@ -402,6 +405,7 @@ def add_active_line_prints(code):
     transformer = AddLinePrints()
     new_tree = transformer.visit(tree)
     return ast.unparse(new_tree)
+
 
 class AddLinePrints(ast.NodeTransformer):
     """
@@ -455,6 +459,7 @@ class AddLinePrints(ast.NodeTransformer):
 
         return new_node
 
+
 def wrap_in_try_except(code):
     # Add import traceback
     code = "import traceback\n" + code
@@ -493,6 +498,7 @@ def wrap_in_try_except(code):
 
     # Convert the modified AST back to source code
     return ast.unparse(parsed_code)
+
 
 def string_to_python(code_as_string):
     parsed_code = ast.parse(code_as_string)

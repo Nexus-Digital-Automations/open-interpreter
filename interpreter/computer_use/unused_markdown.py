@@ -13,6 +13,7 @@ class Style(Enum):
     HEADER = auto()
     CODE_BLOCK = auto()
 
+
 class MarkdownStreamer:
     def __init__(self):
         # ANSI escape codes
@@ -192,6 +193,7 @@ class MarkdownStreamer:
         self.rule_marker_count = 0
         sys.stdout.write(self.RESET)
         sys.stdout.flush()
+
 
 # Download a large markdown file to test different styles
 url = "https://raw.githubusercontent.com/matiassingers/awesome-readme/master/readme.md"

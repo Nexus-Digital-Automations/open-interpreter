@@ -182,8 +182,7 @@ def respond(interpreter):
 
                 # A common hallucination
                 if code.startswith("functions.execute("):
-                    edited_code = code.replace(
-                        "functions.execute(", "").rstrip(")")
+                    edited_code = code.replace("functions.execute(", "").rstrip(")")
                     try:
                         code_dict = json.loads(edited_code)
                         language = code_dict.get("language", language)
@@ -449,8 +448,7 @@ def respond(interpreter):
                         and message["type"] == "message"
                         and combined_messages[-1]["type"] == "message"
                     ):
-                        combined_messages[-1]["content"] += "\n" + \
-                            message["content"]
+                        combined_messages[-1]["content"] += "\n" + message["content"]
                     else:
                         combined_messages.append(message)
                 interpreter.messages = combined_messages

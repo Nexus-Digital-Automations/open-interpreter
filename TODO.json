@@ -200,6 +200,86 @@
       "id": "error_1758491608842_b6wf0o3xsd8",
       "completed_at": "2025-09-21T21:57:22.410Z",
       "updated_at": "2025-09-21T21:57:22.410Z"
+    },
+    {
+      "status": "pending",
+      "created_at": "2025-09-21T23:10:43.864Z",
+      "title": "Comprehensive Browser-Use Package Function Mapping for Parlant Integration",
+      "description": "Complete analysis of browser-use Python package to catalog all browser automation, web interaction, and session management functions with security assessment and conversational validation requirements for Parlant integration",
+      "category": "feature",
+      "id": "feature_1758496243864_j65u2vyjwt"
+    },
+    {
+      "status": "pending",
+      "created_at": "2025-09-21T23:10:51.379Z",
+      "title": "Huginn Function Mapping for Parlant Integration",
+      "description": "Comprehensive Ruby function analysis and mapping across Huginn package for Parlant conversational validation integration with HTTP bridge architecture",
+      "category": "feature",
+      "id": "feature_1758496251379_retwcl0s91h"
+    },
+    {
+      "status": "pending",
+      "created_at": "2025-09-21T23:10:51.515Z",
+      "title": "PARLANT Function Mapping: Comprehensive Bytebot Package Analysis",
+      "description": "Perform comprehensive function mapping and analysis across ALL Bytebot packages (bytebot-agent, bytebotd, bytebot-ui, shared) for Parlant conversational validation integration. Create complete function catalog with risk classifications, integration assessments, priority matrix, and implementation roadmap.",
+      "category": "feature",
+      "id": "feature_1758496251515_f5q19j7ejc"
+    },
+    {
+      "status": "pending",
+      "created_at": "2025-09-21T23:10:52.594Z",
+      "title": "Design Parlant Function Mapping Integration Architecture",
+      "description": "Create comprehensive integration architecture and implementation patterns for Parlant function wrapping across TypeScript, Python, and Ruby codebases with sub-1000ms performance targets, type preservation, and enterprise-grade monitoring",
+      "category": "feature",
+      "id": "feature_1758496252593_m2yzximno"
+    },
+    {
+      "status": "pending",
+      "created_at": "2025-09-21T23:10:53.045Z",
+      "title": "PARLANT External API Integration Analysis",
+      "description": "Comprehensive analysis of all external API calls, third-party integrations, webhook handlers, and authentication patterns across the AIgent ecosystem for Parlant conversational validation. Map data transmission patterns, privacy compliance requirements, and identify critical integration points requiring user approval.",
+      "category": "feature",
+      "id": "feature_1758496253045_p1mgob2rzzq"
+    },
+    {
+      "status": "pending",
+      "created_at": "2025-09-21T23:10:53.304Z",
+      "title": "PARLANT Orchestrator Package Function Mapping Analysis",
+      "description": "Comprehensive analysis of Parlant orchestrator package functions with focus on service coordination, transaction management, resource allocation, and enterprise validation framework design for conversational validation integration",
+      "category": "feature",
+      "id": "feature_1758496253303_mtu6bdoyf9q"
+    },
+    {
+      "status": "pending",
+      "created_at": "2025-09-21T23:10:53.384Z",
+      "title": "Comprehensive Open-Interpreter Function Mapping for Parlant Security Integration",
+      "description": "Analyze Open-Interpreter Python codebase to map ALL functions with focus on security-critical code execution, system interaction, and AI model integration functions. Create comprehensive catalog with function signatures, decorators, async patterns, and security risk matrix for Parlant conversational validation integration.",
+      "category": "feature",
+      "id": "feature_1758496253384_i7hu4k8fbxd"
+    },
+    {
+      "status": "pending",
+      "created_at": "2025-09-21T23:10:53.555Z",
+      "title": "PARLANT Risk Assessment and Priority Matrix Analysis",
+      "description": "Create comprehensive risk assessment matrix and implementation priority framework for 1,520+ functions across AIgent ecosystem. Analyze security risks, business impact, implementation complexity, and create phased deployment roadmap.",
+      "category": "feature",
+      "id": "feature_1758496253555_3volv7nyjik"
+    },
+    {
+      "status": "pending",
+      "created_at": "2025-09-21T23:10:54.768Z",
+      "title": "PARLANT MASTER IMPLEMENTATION ROADMAP: Comprehensive Function Mapping and Enterprise Deployment Strategy",
+      "description": "Synthesize all function mapping analysis into a master implementation roadmap for Parlant integration across the entire AIgent ecosystem. Create comprehensive plan covering: 1) Master Function Registry (1,520+ functions with metadata), 2) Phased Implementation Plan (6-month roadmap), 3) Resource Allocation Matrix, 4) Risk Mitigation Strategy, 5) Success Metrics and KPIs. Deliver executive-ready roadmap for revolutionary conversational validation deployment.",
+      "category": "feature",
+      "id": "feature_1758496254768_tghq6719y1n"
+    },
+    {
+      "status": "pending",
+      "created_at": "2025-09-21T23:10:56.143Z",
+      "title": "Database Operations Mapping for Parlant Conversational Validation",
+      "description": "Comprehensive analysis of ALL database operations across AIgent ecosystem for Parlant integration. Scope: 1) Database Operation Catalog - ALL CRUD operations, queries, transactions across packages 2) Data Flow Analysis - Map data dependencies and transaction boundaries 3) Security Impact Assessment - Risk analysis for data modification and access operations 4) Transaction Management Patterns - Complex transaction validation requirements 5) Backup and Recovery Integration - Conversational validation for data protection operations. Focus on write operations, bulk operations, schema changes, transaction management, and sensitive data access patterns across all packages.",
+      "category": "feature",
+      "id": "feature_1758496256143_wjdc8of29w"
     }
   ],
   "agents": {
@@ -389,6 +469,237 @@
       "workload": 0,
       "maxConcurrentTasks": 5,
       "createdAt": "2025-09-21T21:53:10.753Z",
+      "sessionId": null,
+      "metadata": {}
+    },
+    "dev_session_1758492115069_1_general_c87ee4f0": {
+      "name": "undefined Agent",
+      "role": "development",
+      "specialization": [],
+      "status": "active",
+      "assignedTasks": [],
+      "lastHeartbeat": "2025-09-21T22:01:55.070Z",
+      "parentAgentId": null,
+      "capabilities": [
+        "file-operations",
+        "linting",
+        "testing",
+        "build-fixes",
+        "refactoring"
+      ],
+      "workload": 0,
+      "maxConcurrentTasks": 5,
+      "createdAt": "2025-09-21T22:01:55.070Z",
+      "sessionId": null,
+      "metadata": {}
+    },
+    "dev_session_1758496227361_1_general_f80596ea": {
+      "name": "undefined Agent",
+      "role": "development",
+      "specialization": [],
+      "status": "active",
+      "assignedTasks": [],
+      "lastHeartbeat": "2025-09-21T23:10:27.362Z",
+      "parentAgentId": null,
+      "capabilities": [
+        "file-operations",
+        "linting",
+        "testing",
+        "build-fixes",
+        "refactoring"
+      ],
+      "workload": 0,
+      "maxConcurrentTasks": 5,
+      "createdAt": "2025-09-21T23:10:27.362Z",
+      "sessionId": null,
+      "metadata": {}
+    },
+    "dev_session_1758496233932_1_general_2aea8429": {
+      "name": "undefined Agent",
+      "role": "development",
+      "specialization": [],
+      "status": "active",
+      "assignedTasks": [],
+      "lastHeartbeat": "2025-09-21T23:10:33.932Z",
+      "parentAgentId": null,
+      "capabilities": [
+        "file-operations",
+        "linting",
+        "testing",
+        "build-fixes",
+        "refactoring"
+      ],
+      "workload": 0,
+      "maxConcurrentTasks": 5,
+      "createdAt": "2025-09-21T23:10:33.932Z",
+      "sessionId": null,
+      "metadata": {}
+    },
+    "dev_session_1758496234439_1_general_b61eef97": {
+      "name": "undefined Agent",
+      "role": "development",
+      "specialization": [],
+      "status": "active",
+      "assignedTasks": [],
+      "lastHeartbeat": "2025-09-21T23:10:34.440Z",
+      "parentAgentId": null,
+      "capabilities": [
+        "file-operations",
+        "linting",
+        "testing",
+        "build-fixes",
+        "refactoring"
+      ],
+      "workload": 0,
+      "maxConcurrentTasks": 5,
+      "createdAt": "2025-09-21T23:10:34.440Z",
+      "sessionId": null,
+      "metadata": {}
+    },
+    "dev_session_1758496234949_1_general_b566d19f": {
+      "name": "undefined Agent",
+      "role": "development",
+      "specialization": [],
+      "status": "active",
+      "assignedTasks": [],
+      "lastHeartbeat": "2025-09-21T23:10:34.949Z",
+      "parentAgentId": null,
+      "capabilities": [
+        "file-operations",
+        "linting",
+        "testing",
+        "build-fixes",
+        "refactoring"
+      ],
+      "workload": 0,
+      "maxConcurrentTasks": 5,
+      "createdAt": "2025-09-21T23:10:34.949Z",
+      "sessionId": null,
+      "metadata": {}
+    },
+    "dev_session_1758496235566_1_general_173a0536": {
+      "name": "undefined Agent",
+      "role": "development",
+      "specialization": [],
+      "status": "active",
+      "assignedTasks": [],
+      "lastHeartbeat": "2025-09-21T23:10:35.566Z",
+      "parentAgentId": null,
+      "capabilities": [
+        "file-operations",
+        "linting",
+        "testing",
+        "build-fixes",
+        "refactoring"
+      ],
+      "workload": 0,
+      "maxConcurrentTasks": 5,
+      "createdAt": "2025-09-21T23:10:35.566Z",
+      "sessionId": null,
+      "metadata": {}
+    },
+    "dev_session_1758496235933_1_general_b539a05d": {
+      "name": "undefined Agent",
+      "role": "development",
+      "specialization": [],
+      "status": "active",
+      "assignedTasks": [],
+      "lastHeartbeat": "2025-09-21T23:10:35.933Z",
+      "parentAgentId": null,
+      "capabilities": [
+        "file-operations",
+        "linting",
+        "testing",
+        "build-fixes",
+        "refactoring"
+      ],
+      "workload": 0,
+      "maxConcurrentTasks": 5,
+      "createdAt": "2025-09-21T23:10:35.933Z",
+      "sessionId": null,
+      "metadata": {}
+    },
+    "dev_session_1758496236153_1_general_fadecdf4": {
+      "name": "undefined Agent",
+      "role": "development",
+      "specialization": [],
+      "status": "active",
+      "assignedTasks": [],
+      "lastHeartbeat": "2025-09-21T23:10:36.153Z",
+      "parentAgentId": null,
+      "capabilities": [
+        "file-operations",
+        "linting",
+        "testing",
+        "build-fixes",
+        "refactoring"
+      ],
+      "workload": 0,
+      "maxConcurrentTasks": 5,
+      "createdAt": "2025-09-21T23:10:36.153Z",
+      "sessionId": null,
+      "metadata": {}
+    },
+    "dev_session_1758496236492_1_general_1f2fb2e4": {
+      "name": "undefined Agent",
+      "role": "development",
+      "specialization": [],
+      "status": "active",
+      "assignedTasks": [],
+      "lastHeartbeat": "2025-09-21T23:10:36.494Z",
+      "parentAgentId": null,
+      "capabilities": [
+        "file-operations",
+        "linting",
+        "testing",
+        "build-fixes",
+        "refactoring"
+      ],
+      "workload": 0,
+      "maxConcurrentTasks": 5,
+      "createdAt": "2025-09-21T23:10:36.494Z",
+      "sessionId": null,
+      "metadata": {}
+    },
+    "dev_session_1758496236634_1_general_d74fee5b": {
+      "name": "undefined Agent",
+      "role": "development",
+      "specialization": [],
+      "status": "active",
+      "assignedTasks": [],
+      "lastHeartbeat": "2025-09-21T23:10:36.634Z",
+      "parentAgentId": null,
+      "capabilities": [
+        "file-operations",
+        "linting",
+        "testing",
+        "build-fixes",
+        "refactoring"
+      ],
+      "workload": 0,
+      "maxConcurrentTasks": 5,
+      "createdAt": "2025-09-21T23:10:36.634Z",
+      "sessionId": null,
+      "metadata": {}
+    },
+    "dev_session_1758496236791_1_general_1813e1c0": {
+      "name": "undefined Agent",
+      "role": "development",
+      "specialization": [],
+      "status": "active",
+      "assignedTasks": [],
+      "lastHeartbeat": "2025-09-21T23:10:36.791Z",
+      "parentAgentId": null,
+      "capabilities": [
+        "file-operations",
+        "linting",
+        "testing",
+        "build-fixes",
+        "refactoring"
+      ],
+      "workload": 0,
+      "maxConcurrentTasks": 5,
+      "createdAt": "2025-09-21T23:10:36.791Z",
       "sessionId": null,
       "metadata": {}
     }

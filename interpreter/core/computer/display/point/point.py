@@ -27,6 +27,7 @@ except LookupError:
 # Create a set of English words
 english_words = set(words.words())
 
+
 def take_screenshot_to_pil(filename="temp_screenshot.png"):
     # Capture the screenshot and save it to a temporary file
     subprocess.run(["screencapture", "-x", filename], check=True)
@@ -41,11 +42,13 @@ def take_screenshot_to_pil(filename="temp_screenshot.png"):
 
     return image
 
+
 def point(description, screenshot=None, debug=False, hashes=None):
     if description.startswith('"') and description.endswith('"'):
         return find_text_in_image(description.strip('"'), screenshot, debug)
     else:
         return find_icon(description, screenshot, debug, hashes)
+
 
 def find_icon(description, screenshot=None, debug=False, hashes=None):
     if debug:
@@ -438,6 +441,7 @@ def find_icon(description, screenshot=None, debug=False, hashes=None):
     # Return the top pick icon data
     return coordinates
 
+
 # torch.set_num_threads(4)
 
 fast_model = True
@@ -446,7 +450,9 @@ fast_model = True
 model = SentenceTransformer("clip-ViT-B-32")
 
 # Path for saving/loading the model
-model_path = os.path.join(os.path.expanduser("~"), ".cache", "open-interpreter", "vit_model.pth")
+model_path = os.path.join(
+    os.path.expanduser("~"), ".cache", "open-interpreter", "vit_model.pth"
+)
 
 if not fast_model:
     # Check if the model file exists
@@ -494,6 +500,7 @@ else:
 # Move the model to the specified device
 model = model.to(device)
 
+
 def image_search(query, icons, hashes, debug):
     hashed_icons = [icon for icon in icons if icon["hash"] in hashes]
     unhashed_icons = [icon for icon in icons if icon["hash"] not in hashes]
@@ -539,6 +546,7 @@ def image_search(query, icons, hashes, debug):
 
     # Convert results to original icon format
     return [icons[hit["corpus_id"]] for hit in results]
+
 
 def get_element_boxes(image_data, debug):
     desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")
@@ -640,7 +648,6 @@ def get_element_boxes(image_data, debug):
         return contours_contrasted
 
     if os.getenv("OI_POINT_PERMUTATE", "False") == "True":
-
         for _ in range(10):
             random_contrast = random.uniform(
                 1, 40

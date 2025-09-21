@@ -390,9 +390,9 @@ class EnhancedInterpreterServer:
 
             # Add performance headers
             response.headers["X-Process-Time"] = str(process_time)
-            response.headers["X-Request-ID"] = (
-                f"req_{int(time.time())}_{self.total_requests}"
-            )
+            response.headers[
+                "X-Request-ID"
+            ] = f"req_{int(time.time())}_{self.total_requests}"
 
             return response
 

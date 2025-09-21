@@ -17,6 +17,7 @@ np = lazy_import("numpy")
 pyautogui = lazy_import("pyautogui")
 plt = lazy_import("matplotlib.pyplot")
 
+
 class Mouse:
     def __init__(self, computer):
         self.computer = computer
@@ -270,6 +271,7 @@ class Mouse:
         Releases the mouse button.
         """
         pyautogui.mouseUp()
+
 
 def smooth_move_to(x, y, duration=2):
     start_x, start_y = pyautogui.position()
