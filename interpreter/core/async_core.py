@@ -8,7 +8,7 @@ import time
 import traceback
 import uuid
 from collections import deque
-from datetime import datetime
+from datetime import datetime, timedelta
 from enum import Enum
 from typing import Any, Dict, List, Optional, Union
 
@@ -627,10 +627,10 @@ class AsyncInterpreter(OpenInterpreter):
         """
         Accumulates LMC chunks onto interpreter.messages.
         """
-        if type(chunk) == str:
+        if isinstance(chunk, str):
             chunk = json.loads(chunk)
 
-        if type(chunk) == dict:
+        if isinstance(chunk, dict):
             if chunk.get("format") == "active_line":
                 # We don't do anything with these.
                 pass
@@ -687,7 +687,7 @@ class AsyncInterpreter(OpenInterpreter):
                     chunk_copy["content"] = ""
                 self.messages.append(chunk_copy)
 
-        elif type(chunk) == bytes:
+        elif isinstance(chunk, bytes):
             if self.messages[-1]["content"] == "":  # We initialize as an empty string ^
                 self.messages[-1]["content"] = b""  # But it actually should be bytes
             self.messages[-1]["content"] += chunk
@@ -1479,7 +1479,7 @@ def create_router(async_interpreter):
             and last_message.content.lower().strip(".!?").strip() == "yes"
         ):
             run_code = True
-        elif type(last_message.content) == str:
+        elif isinstance(last_message.content, str):
             async_interpreter.messages.append(
                 {
                     "role": "user",
@@ -1488,7 +1488,7 @@ def create_router(async_interpreter):
                 }
             )
             print(">", last_message.content)
-        elif type(last_message.content) == list:
+        elif isinstance(last_message.content, list):
             for content in last_message.content:
                 if content["type"] == "text":
                     async_interpreter.messages.append(

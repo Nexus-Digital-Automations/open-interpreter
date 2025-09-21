@@ -6,6 +6,7 @@ import traceback
 import litellm
 
 from .render_message import render_message
+from ..terminal_interface.utils.display_markdown_message import display_markdown_message
 
 # Configure environment
 os.environ["LITELLM_LOCAL_MODEL_COST_MAP"] = "True"
@@ -19,6 +20,7 @@ def respond(interpreter):
 
     last_unsupported_code = ""
     insert_loop_message = False
+    loop_message = ""
 
     while True:
         # RENDER SYSTEM MESSAGE ##
@@ -114,7 +116,7 @@ def respond(interpreter):
                         f"{output}\n\nThere might be an issue with your API key(s).\n\nTo reset your API key (we'll use OPENAI_API_KEY for this example, but you may need to reset your ANTHROPIC_API_KEY, HUGGINGFACE_API_KEY, etc):\n        Mac/Linux: 'export OPENAI_API_KEY=your-key-here'. Update your ~/.zshrc on MacOS or ~/.bashrc on Linux with the new key if it has already been persisted there.,\n        Windows: 'setx OPENAI_API_KEY your-key-here' then restart terminal.\n\n"
                     )
                 elif (
-                    type(e) == litellm.exceptions.RateLimitError
+                    isinstance(e, litellm.exceptions.RateLimitError)
                     and "exceeded" in str(e).lower()
                     or "insufficient_quota" in str(e).lower()
                 ):

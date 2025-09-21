@@ -1,10 +1,12 @@
+import math
 import time
 import warnings
+
 from IPython.display import display
 from PIL import Image
+
 from ...utils.lazy_import import lazy_import
 from ..utils.recipient_utils import format_to_recipient
-import math
 
 # Lazy import of optional packages
 try:

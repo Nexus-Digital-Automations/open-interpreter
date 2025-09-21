@@ -25,17 +25,19 @@ Prerequisites:
 import asyncio
 import logging
 import sys
+import threading
 import time
 import traceback
 from datetime import datetime
-    import httpx
-    import pytest
+
+import httpx
+import pytest
+import uvicorn
+
 from interpreter.core.async_core import AsyncInterpreter
 from interpreter.core.enhanced_terminal import EnhancedTerminal, ExecutionResult
 from interpreter.core.job_manager import JobManager, JobStatus
 from interpreter.server import EnhancedInterpreterServer
-            import threading
-            import uvicorn
 
 # Add interpreter to path for imports
 sys.path.insert(

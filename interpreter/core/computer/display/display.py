@@ -6,8 +6,8 @@ from IPython.display import display
 from PIL import Image
 
 from ...utils.lazy_import import lazy_import
-from ..utils.recipient_utils import format_to_recipient
 from ..utils.computer_vision import find_text_in_image, pytesseract_get_text
+from ..utils.recipient_utils import format_to_recipient
 
 # Still experimenting with this
 # from utils.get_active_window import get_active_window
@@ -429,5 +429,5 @@ def take_screenshot_to_pil(screen=0, combine_screens=True):
 
 
 def get_displays():
-    monitors = get_monitors()
+    monitors = screeninfo.get_monitors()
     return monitors

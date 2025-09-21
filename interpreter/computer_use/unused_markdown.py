@@ -1,7 +1,9 @@
 import sys
 from enum import Enum, auto
 from typing import Set
+
 import requests
+
 
 class Style(Enum):
     NORMAL = auto()

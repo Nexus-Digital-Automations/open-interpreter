@@ -10,12 +10,12 @@ import sys
 import threading
 import time
 import traceback
+
 import litellm
+from ipykernel import kernelapp as app
 from jupyter_client import KernelManager
+
 from ..base_language import BaseLanguage
-    from ipykernel import kernelapp as app
-import matplotlib
-import matplotlib.pyplot as plt
 
 os.environ["LITELLM_LOCAL_MODEL_COST_MAP"] = "True"
 
@@ -112,7 +112,7 @@ matplotlib.use('{backend}')
         try:
             try:
                 preprocessed_code = self.preprocess_code(code)
-            except:
+            except Exception:
                 # Any errors produced here are our fault.
                 # Also, for python, you don't need them! It's just for active_line and stuff. Just looks pretty.
                 preprocessed_code = code
@@ -121,7 +121,7 @@ matplotlib.use('{backend}')
             yield from self._capture_output(message_queue)
         except GeneratorExit:
             raise  # gotta pass this up!
-        except:
+        except Exception:
             content = traceback.format_exc()
             yield {"type": "console", "format": "output", "content": content}
 
@@ -177,7 +177,7 @@ matplotlib.use('{backend}')
                         response = ""
                         for chunk in litellm.completion(**params):
                             content = chunk.choices[0].delta.content
-                            if type(content) == str:
+                            if isinstance(content, str):
                                 response += content
 
                         # Parse the response for input tags
@@ -305,7 +305,7 @@ matplotlib.use('{backend}')
             # Split the last active line by "##" and grab the first element
             try:
                 active_line = int(last_active_line.split("##")[0])
-            except:
+            except (ValueError, IndexError):
                 active_line = 0
             # Remove all ##active_line{number}##\n
             line = re.sub(r"##active_line\d+##\n", "", line)
@@ -396,7 +396,7 @@ def add_active_line_prints(code):
     processed_code = "\n".join(code_lines)
     try:
         tree = ast.parse(processed_code)
-    except:
+    except SyntaxError:
         # If you can't parse the processed version, try the unprocessed version before giving up
         tree = ast.parse(code)
     transformer = AddLinePrints()

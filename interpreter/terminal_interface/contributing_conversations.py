@@ -162,8 +162,8 @@ def get_all_conversations(interpreter) -> List[List]:
     return all_conversations
 
 
-def is_list_of_lists(l):
-    return isinstance(l, list) and all([isinstance(e, list) for e in l])
+def is_list_of_lists(obj):
+    return isinstance(obj, list) and all([isinstance(e, list) for e in obj])
 
 
 def contribute_conversations(

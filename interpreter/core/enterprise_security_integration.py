@@ -31,6 +31,7 @@ from urllib3.util.retry import Retry
 
 from .ultra_secure_code_execution import (
     ApprovalLevel,
+    ExecutionEnvironment,
     ExecutionRequest,
     ExecutionResult,
     RiskLevel,

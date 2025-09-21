@@ -2,37 +2,29 @@ import os
 import signal
 import time
 from random import randint
-import pytest
-from interpreter import AsyncInterpreter, OpenInterpreter
-from interpreter.terminal_interface.utils.count_tokens import (
-import multiprocessing
-import threading
-from websocket import create_connection
-    import asyncio
-    import json
-    import requests
-    import websockets
-    import asyncio
-    import json
-    import requests
-    import websockets
-    import os
-    import time
-    import sys
-    import json
-        import subprocess
-        import subprocess
-    import pyautogui
-    import requests
-    import threading
-    import time
-    import pywinctl
-import time
-import os
 
-#####
+import pytest
+
+from interpreter import AsyncInterpreter, OpenInterpreter
+from interpreter.terminal_interface.utils.count_tokens import (  # ####
+    asyncio,
     count_messages_tokens,
     count_tokens,
+    create_connection,
+    from,
+    import,
+    json,
+    multiprocessing,
+    os,
+    pyautogui,
+    pywinctl,
+    requests,
+    subprocess,
+    sys,
+    threading,
+    time,
+    websocket,
+    websockets,
 )
 
 interpreter = OpenInterpreter()

@@ -755,7 +755,7 @@ except Exception as e:
     exit_code = 1
 
 execution_time = time.time() - start_time
-print(f"EXECUTION_METADATA:{{'success': {exit_code == 0}, 'time': {execution_time}, 'exit_code': {exit_code}}}")
+print(f"EXECUTION_METADATA:{{'success': {{exit_code == 0}}, 'time': {{execution_time}}, 'exit_code': {{exit_code}}}}")
 """
 
         script_path = os.path.join(

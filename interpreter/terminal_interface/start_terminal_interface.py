@@ -362,7 +362,7 @@ Use """ to write multi-line messages.
             [f"-{nickname}", f'--{arg["name"]}'] if nickname else [f'--{arg["name"]}']
         )
 
-        if arg["type"] == bool:
+        if arg["type"] is bool:
             parser.add_argument(
                 *flags,
                 dest=arg["name"],

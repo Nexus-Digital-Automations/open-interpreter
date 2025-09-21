@@ -1,19 +1,23 @@
 import hashlib
 import io
 import os
+import random
 import subprocess
 from typing import List
+
 import cv2
 import nltk
 import numpy as np
+import timm
 import torch
+from nltk.corpus import words
 from PIL import Image, ImageDraw, ImageEnhance, ImageFont
 from sentence_transformers import SentenceTransformer, util
-from ...utils.computer_vision import pytesseract_get_text_bounding_boxes
-from nltk.corpus import words
-from ...utils.computer_vision import find_text_in_image
-import timm
-        import random
+
+from ...utils.computer_vision import (
+    find_text_in_image,
+    pytesseract_get_text_bounding_boxes,
+)
 
 try:
     nltk.corpus.words.words()
@@ -440,6 +444,9 @@ fast_model = True
 
 # First, we load the respective CLIP model
 model = SentenceTransformer("clip-ViT-B-32")
+
+# Path for saving/loading the model
+model_path = os.path.join(os.path.expanduser("~"), ".cache", "open-interpreter", "vit_model.pth")
 
 if not fast_model:
     # Check if the model file exists

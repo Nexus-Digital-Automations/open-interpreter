@@ -1,13 +1,3 @@
-import asyncio
-import os
-import sys
-from pathlib import Path
-from interpreter.ultra_secure_init import (
-import json
-import subprocess
-import os
-        import traceback
-
 #!/usr/bin/env python3
 """
 Ultra-Secure Open-Interpreter Demo
@@ -21,9 +11,15 @@ This example shows how to use all the security features in a realistic scenario.
 @since 1.0.0
 """
 
+import asyncio
+import os
+import sys
+from pathlib import Path
+
 # Add interpreter path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
+from interpreter.ultra_secure_init import (
     compliance_report,
     display_ultra_secure_banner,
     enterprise_interpreter,
@@ -33,6 +29,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
     smart_interpreter,
     ultra_secure_interpreter,
 )
+
 
 async def demo_basic_ultra_secure():
     """Demonstrate basic ultra-secure interpreter usage"""
@@ -50,6 +47,7 @@ async def demo_basic_ultra_secure():
     # Safe code execution (should be approved automatically)
     safe_code = """
 # Safe data analysis code
+import json
 data = {"sales": [100, 200, 300], "month": "January"}
 total_sales = sum(data["sales"])
 print(f"Total sales for {data['month']}: ${total_sales}")
@@ -77,12 +75,13 @@ print(f"Total sales for {data['month']}: ${total_sales}")
     # Demonstrate chat with security validation
     print("\n💬 Demonstrating secure chat interaction...")
     try:
-        await interpreter.chat_async(
+        chat_response = await interpreter.chat_async(
             "Please help me analyze a CSV file with customer data", display=True
         )
         print("✅ Chat completed successfully")
     except Exception as e:
         print(f"❌ Chat failed: {e}")
+
 
 async def demo_high_risk_code():
     """Demonstrate high-risk code handling"""
@@ -92,6 +91,8 @@ async def demo_high_risk_code():
 
     # High-risk code that should trigger extensive validation
     high_risk_code = """
+import subprocess
+import os
 
 # This code has high risk factors:
 # - System command execution
@@ -137,6 +138,7 @@ print(f"Directory contents: {os.listdir('.')[:10]}")  # Limit listing
     except Exception as e:
         print(f"❌ Execution error: {e}")
 
+
 def demo_enterprise_integration():
     """Demonstrate enterprise security integration"""
     print("\n🏢 === ENTERPRISE INTEGRATION DEMO ===")
@@ -169,12 +171,26 @@ def demo_enterprise_integration():
     print(f"   Security Level: {status['interpreter_security']['security_level']}")
     print(f"   Compliance Mode: {status['interpreter_security']['compliance_mode']}")
     print(
-        f"   Validation Metrics: "
-        f"{status['validation_metrics']['performance_metrics']['total_requests']} "
-        f"requests processed"
+        f"   Validation Metrics: {status['validation_metrics']['performance_metrics']['total_requests']} requests processed"
     )
 
-    # Demonstrate compliance-sensitive code processing
+    # Demonstrate compliance-sensitive code
+    compliance_code = """
+# Code that triggers compliance checks
+import pandas as pd
+
+# Simulated customer data processing (triggers GDPR checks)
+customer_data = {
+    'customer_id': [1, 2, 3],
+    'email': ['john@example.com', 'jane@example.com', 'bob@example.com'],
+    'purchase_amount': [100.50, 250.00, 75.25]
+}
+
+df = pd.DataFrame(customer_data)
+print("Customer data analysis:")
+print(df.describe())
+"""
+
     print("\n🔍 Executing compliance-sensitive code...")
     try:
         # This would be async in production
@@ -185,6 +201,7 @@ def demo_enterprise_integration():
 
     except Exception as e:
         print(f"❌ Enterprise processing error: {e}")
+
 
 def demo_financial_grade_security():
     """Demonstrate maximum security for financial environments"""
@@ -200,7 +217,35 @@ def demo_financial_grade_security():
     print(f"   📋 Max execution time: {interpreter.max_execution_time}s")
     print(f"   💾 Max memory: {interpreter.max_memory_mb}MB")
 
-    # Financial calculation processing with maximum security
+    # Financial calculation code (high security requirements)
+    financial_code = """
+# Financial risk calculation
+import math
+
+def calculate_portfolio_risk(positions, correlations):
+    \"\"\"Calculate portfolio Value at Risk (VaR)\"\"\"
+    total_value = sum(pos['value'] for pos in positions)
+    weighted_volatility = sum(
+        (pos['value'] / total_value) * pos['volatility']
+        for pos in positions
+    )
+
+    # 95% confidence VaR
+    var_95 = total_value * weighted_volatility * 1.645
+    return var_95
+
+# Sample portfolio data
+portfolio = [
+    {'asset': 'AAPL', 'value': 100000, 'volatility': 0.15},
+    {'asset': 'GOOGL', 'value': 150000, 'volatility': 0.18},
+    {'asset': 'MSFT', 'value': 125000, 'volatility': 0.12}
+]
+
+correlations = [[1.0, 0.3, 0.4], [0.3, 1.0, 0.35], [0.4, 0.35, 1.0]]
+risk = calculate_portfolio_risk(portfolio, correlations)
+print(f"Portfolio VaR (95% confidence): ${risk:,.2f}")
+"""
+
     print("\n🔍 Executing financial calculation with maximum security...")
     try:
         # In production, this would require board-level approval for critical operations
@@ -213,6 +258,7 @@ def demo_financial_grade_security():
 
     except Exception as e:
         print(f"❌ Financial security validation error: {e}")
+
 
 def demo_security_monitoring():
     """Demonstrate security monitoring and reporting"""
@@ -249,6 +295,7 @@ def demo_security_monitoring():
             print(f"     Environment: {info['execution_environment']}")
             print(f"     Created: {info['created_at']}")
 
+
 def demo_smart_configuration():
     """Demonstrate smart environment-based configuration"""
     print("\n🧠 === SMART CONFIGURATION DEMO ===")
@@ -270,6 +317,7 @@ def demo_smart_configuration():
             print(f"   Max Execution Time: {interpreter.max_execution_time}s")
         except Exception as e:
             print(f"❌ Error creating interpreter for {env}: {e}")
+
 
 async def main():
     """Run all demonstrations"""
@@ -294,8 +342,10 @@ async def main():
         print("\n⚠️ Demonstration interrupted by user")
     except Exception as e:
         print(f"\n❌ Demonstration failed: {e}")
+        import traceback
 
         traceback.print_exc()
+
 
 if __name__ == "__main__":
     # Display banner
