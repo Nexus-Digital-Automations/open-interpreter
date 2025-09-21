@@ -148,6 +148,40 @@
       ],
       "completed_at": "2025-09-21T18:03:52.667Z",
       "updated_at": "2025-09-21T18:03:52.667Z"
+    },
+    {
+      "status": "pending",
+      "created_at": "2025-09-21T21:53:23.149Z",
+      "title": "Fix isort import sorting and black formatting in interpreter/core/respond.py",
+      "description": "Fix isort import sorting violation and black formatting issues in interpreter/core/respond.py. Run isort --fix and black formatting to achieve perfect formatting compliance.",
+      "category": "error",
+      "id": "error_1758491603149_lazv10novel"
+    },
+    {
+      "status": "pending",
+      "created_at": "2025-09-21T21:53:23.444Z",
+      "title": "Fix ALL 9 critical invalid-syntax errors in open-interpreter package",
+      "description": "Use ruff autofix with --unsafe-fixes first, then manual fixes for remaining syntax errors. Focus ONLY on syntax violations. Target: ZERO syntax errors.",
+      "category": "error",
+      "id": "error_1758491603444_0sub1attnrma"
+    },
+    {
+      "status": "completed",
+      "created_at": "2025-09-21T21:53:24.568Z",
+      "title": "Fix all F841 unused-variable errors in open-interpreter package",
+      "description": "Eliminate all 3 F841 unused-variable linting errors in the open-interpreter package. Use autofix where possible, then manual variable removal or usage fixes. Target: ZERO F841 errors.",
+      "category": "error",
+      "id": "error_1758491604568_lduhtuzncq",
+      "completed_at": "2025-09-21T21:54:26.247Z",
+      "updated_at": "2025-09-21T21:54:26.247Z"
+    },
+    {
+      "status": "pending",
+      "created_at": "2025-09-21T21:53:28.842Z",
+      "title": "Fix E741 ambiguous-variable-name and F821 undefined-name errors in open-interpreter",
+      "description": "Identify and fix 1 E741 ambiguous variable name error and 1 F821 undefined name error in the open-interpreter package. Focus on descriptive variable names and proper imports/definitions to achieve zero naming violations.",
+      "category": "error",
+      "id": "error_1758491608842_b6wf0o3xsd8"
     }
   ],
   "agents": {
@@ -253,6 +287,90 @@
       "workload": 0,
       "maxConcurrentTasks": 5,
       "createdAt": "2025-09-21T18:12:27.475Z",
+      "sessionId": null,
+      "metadata": {}
+    },
+    "dev_session_1758491585728_1_general_a8a2d596": {
+      "name": "undefined Agent",
+      "role": "development",
+      "specialization": [],
+      "status": "active",
+      "assignedTasks": [],
+      "lastHeartbeat": "2025-09-21T21:53:05.728Z",
+      "parentAgentId": null,
+      "capabilities": [
+        "file-operations",
+        "linting",
+        "testing",
+        "build-fixes",
+        "refactoring"
+      ],
+      "workload": 0,
+      "maxConcurrentTasks": 5,
+      "createdAt": "2025-09-21T21:53:05.728Z",
+      "sessionId": null,
+      "metadata": {}
+    },
+    "dev_session_1758491586152_1_general_d786c7f3": {
+      "name": "undefined Agent",
+      "role": "development",
+      "specialization": [],
+      "status": "active",
+      "assignedTasks": [],
+      "lastHeartbeat": "2025-09-21T21:53:06.152Z",
+      "parentAgentId": null,
+      "capabilities": [
+        "file-operations",
+        "linting",
+        "testing",
+        "build-fixes",
+        "refactoring"
+      ],
+      "workload": 0,
+      "maxConcurrentTasks": 5,
+      "createdAt": "2025-09-21T21:53:06.152Z",
+      "sessionId": null,
+      "metadata": {}
+    },
+    "dev_session_1758491586518_1_general_f40a1e1b": {
+      "name": "undefined Agent",
+      "role": "development",
+      "specialization": [],
+      "status": "active",
+      "assignedTasks": [],
+      "lastHeartbeat": "2025-09-21T21:53:06.518Z",
+      "parentAgentId": null,
+      "capabilities": [
+        "file-operations",
+        "linting",
+        "testing",
+        "build-fixes",
+        "refactoring"
+      ],
+      "workload": 0,
+      "maxConcurrentTasks": 5,
+      "createdAt": "2025-09-21T21:53:06.518Z",
+      "sessionId": null,
+      "metadata": {}
+    },
+    "dev_session_1758491590753_1_general_437f9f32": {
+      "name": "undefined Agent",
+      "role": "development",
+      "specialization": [],
+      "status": "active",
+      "assignedTasks": [],
+      "lastHeartbeat": "2025-09-21T21:53:10.753Z",
+      "parentAgentId": null,
+      "capabilities": [
+        "file-operations",
+        "linting",
+        "testing",
+        "build-fixes",
+        "refactoring"
+      ],
+      "workload": 0,
+      "maxConcurrentTasks": 5,
+      "createdAt": "2025-09-21T21:53:10.753Z",
       "sessionId": null,
       "metadata": {}
     }

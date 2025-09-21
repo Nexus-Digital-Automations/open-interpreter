@@ -5,8 +5,8 @@ import traceback
 
 import litellm
 
-from .render_message import render_message
 from ..terminal_interface.utils.display_markdown_message import display_markdown_message
+from .render_message import render_message
 
 # Configure environment
 os.environ["LITELLM_LOCAL_MODEL_COST_MAP"] = "True"
@@ -177,11 +177,13 @@ def respond(interpreter):
                     code = code[2:].strip()
                     if interpreter.verbose:
                         print("Removing `\n")
-                    interpreter.messages[-1]["content"] = code  # So the LLM can see it.
+                    # So the LLM can see it.
+                    interpreter.messages[-1]["content"] = code
 
                 # A common hallucination
                 if code.startswith("functions.execute("):
-                    edited_code = code.replace("functions.execute(", "").rstrip(")")
+                    edited_code = code.replace(
+                        "functions.execute(", "").rstrip(")")
                     try:
                         code_dict = json.loads(edited_code)
                         language = code_dict.get("language", language)
@@ -447,7 +449,8 @@ def respond(interpreter):
                         and message["type"] == "message"
                         and combined_messages[-1]["type"] == "message"
                     ):
-                        combined_messages[-1]["content"] += "\n" + message["content"]
+                        combined_messages[-1]["content"] += "\n" + \
+                            message["content"]
                     else:
                         combined_messages.append(message)
                 interpreter.messages = combined_messages

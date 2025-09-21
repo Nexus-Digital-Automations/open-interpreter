@@ -75,7 +75,7 @@ print(f"Total sales for {data['month']}: ${total_sales}")
     # Demonstrate chat with security validation
     print("\n💬 Demonstrating secure chat interaction...")
     try:
-        chat_response = await interpreter.chat_async(
+        await interpreter.chat_async(
             "Please help me analyze a CSV file with customer data", display=True
         )
         print("✅ Chat completed successfully")
@@ -175,21 +175,6 @@ def demo_enterprise_integration():
     )
 
     # Demonstrate compliance-sensitive code
-    compliance_code = """
-# Code that triggers compliance checks
-import pandas as pd
-
-# Simulated customer data processing (triggers GDPR checks)
-customer_data = {
-    'customer_id': [1, 2, 3],
-    'email': ['john@example.com', 'jane@example.com', 'bob@example.com'],
-    'purchase_amount': [100.50, 250.00, 75.25]
-}
-
-df = pd.DataFrame(customer_data)
-print("Customer data analysis:")
-print(df.describe())
-"""
 
     print("\n🔍 Executing compliance-sensitive code...")
     try:
@@ -218,33 +203,6 @@ def demo_financial_grade_security():
     print(f"   💾 Max memory: {interpreter.max_memory_mb}MB")
 
     # Financial calculation code (high security requirements)
-    financial_code = """
-# Financial risk calculation
-import math
-
-def calculate_portfolio_risk(positions, correlations):
-    \"\"\"Calculate portfolio Value at Risk (VaR)\"\"\"
-    total_value = sum(pos['value'] for pos in positions)
-    weighted_volatility = sum(
-        (pos['value'] / total_value) * pos['volatility']
-        for pos in positions
-    )
-
-    # 95% confidence VaR
-    var_95 = total_value * weighted_volatility * 1.645
-    return var_95
-
-# Sample portfolio data
-portfolio = [
-    {'asset': 'AAPL', 'value': 100000, 'volatility': 0.15},
-    {'asset': 'GOOGL', 'value': 150000, 'volatility': 0.18},
-    {'asset': 'MSFT', 'value': 125000, 'volatility': 0.12}
-]
-
-correlations = [[1.0, 0.3, 0.4], [0.3, 1.0, 0.35], [0.4, 0.35, 1.0]]
-risk = calculate_portfolio_risk(portfolio, correlations)
-print(f"Portfolio VaR (95% confidence): ${risk:,.2f}")
-"""
 
     print("\n🔍 Executing financial calculation with maximum security...")
     try:
