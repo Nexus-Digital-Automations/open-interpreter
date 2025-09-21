@@ -520,9 +520,6 @@ def apply_parlant_validation_to_class(cls):
             def create_validated_method(method_name, operation_type, original_method):
                 async def validated_method(self, *args, **kwargs):
                     service = get_parlant_service()
-                    operation_id = (
-                        f"{method_name}_{id(self)}_{int(__import__('time').time())}"
-                    )
 
                     # Build context from method arguments
                     context = {

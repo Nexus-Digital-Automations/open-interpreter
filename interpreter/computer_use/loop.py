@@ -1,25 +1,31 @@
 """
-Based on Anthropic's computer use example at https://github.com/anthropics/anthropic-quickstarts/blob/main/computer-use-demo/computer_use_demo/loop.py
+Based on Anthropic's computer use example at:
+https://github.com/anthropics/anthropic-quickstarts/blob/main/computer-use-demo/computer_use_demo/loop.py
 """
 
+# Standard library imports
 import asyncio
 import json
 import os
 import platform
+import sys
+import threading
 import time
 import traceback
 import uuid
 from collections.abc import Callable
 from datetime import datetime
+from typing import Any, List, Optional, cast
 
 try:
     from enum import StrEnum
 except ImportError:  # 3.10 compatibility
     from enum import Enum as StrEnum
 
-from typing import Any, List, cast
-
+# Third-party imports
+import pyautogui
 import requests
+import uvicorn
 from anthropic import Anthropic, AnthropicBedrock, AnthropicVertex
 from anthropic.types import ToolResultBlockParam
 from anthropic.types.beta import (
@@ -34,20 +40,18 @@ from anthropic.types.beta import (
     BetaTextBlockParam,
     BetaToolResultBlockParam,
 )
-
-from .tools import ComputerTool, ToolCollection, ToolResult
-
-BETA_FLAG = "computer-use-2024-10-22"
-
-from typing import Optional
-
-import uvicorn
 from fastapi import FastAPI
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from rich import print as rich_print
 from rich.markdown import Markdown
 from rich.rule import Rule
+
+# Local imports
+from .tools import ComputerTool, ToolCollection, ToolResult
+
+# Constants
+BETA_FLAG = "computer-use-2024-10-22"
 
 # Add this near the top of the file, with other imports and global variables
 messages: List[BetaMessageParam] = []
@@ -68,7 +72,7 @@ def print_markdown(message):
         else:
             try:
                 rich_print(Markdown(line))
-            except UnicodeEncodeError as _e:
+            except UnicodeEncodeError:
                 # Replace the problematic character or handle the error as needed
                 print("Error displaying line:", line)
 
@@ -97,8 +101,12 @@ PROVIDER_TO_DEFAULT_MODEL_NAME: dict[APIProvider, str] = {
 # helpful for the task at hand.
 
 SYSTEM_PROMPT = f"""<SYSTEM_CAPABILITY>
-* You are an AI assistant with access to a virtual machine running on {"Mac OS" if platform.system() == "Darwin" else platform.system()} with internet access.
-* When using your computer function calls, they take a while to run and send back to you. Where possible/feasible, try to chain multiple of these calls all into one function calls request.
+* You are an AI assistant with access to a virtual machine running on {
+    "Mac OS" if platform.system() == "Darwin" else platform.system()
+} with internet access.
+* When using your computer function calls, they take a while to run and send back to
+you. Where possible/feasible, try to chain multiple of these calls all into one
+function calls request.
 * The current date is {datetime.today().strftime('%A, %B %d, %Y')}.
 </SYSTEM_CAPABILITY>"""
 
@@ -360,7 +368,8 @@ async def main():
             async def stream_response():
                 print("is this even happening")
 
-                # Instead of creating converted_messages, append the last message to global messages
+                # Instead of creating converted_messages, append the last message to
+                # global messages
                 global messages
                 messages.append(
                     {
@@ -374,19 +383,31 @@ async def main():
                 response_chunks = []
 
                 async def output_callback(content_block: BetaContentBlock):
-                    chunk = f"data: {json.dumps({'choices': [{'delta': {'content': content_block.text}}]})}\n\n"
+                    chunk = f"data: {
+                        json.dumps(
+                            {
+                                'choices': [
+                                    {
+                                        'delta': {
+                                            'content': content_block.text}}]})}\n\n"
                     response_chunks.append(chunk)
                     yield chunk
 
                 async def tool_output_callback(result: ToolResult, tool_id: str):
                     if result.output or result.error:
                         content = result.output if result.output else result.error
-                        chunk = f"data: {json.dumps({'choices': [{'delta': {'content': content}}]})}\n\n"
+                        chunk = (
+                            f"data: {json.dumps({'choices': [{'delta': {'content': content}}]})}"
+                            f"\n\n"
+                        )
                         response_chunks.append(chunk)
                         yield chunk
 
                 try:
-                    yield f"data: {json.dumps({'choices': [{'delta': {'role': 'assistant'}}]})}\n\n"
+                    yield (
+                        f"data: {json.dumps({'choices': [{'delta': {'role': 'assistant'}}]})}"
+                        f"\n\n"
+                    )
 
                     messages = [m for m in messages if m["content"]]
                     print(str(messages)[-100:])
@@ -417,7 +438,9 @@ async def main():
                     # print(f"Error: {e}")
                     # yield f"data: {json.dumps({'error': str(e)})}\n\n"
 
-            return StreamingResponse(stream_response(), media_type="text/event-stream")
+            return StreamingResponse(
+                stream_response(), media_type="text/event-stream"
+            )
 
         # Instead of running uvicorn here, we'll return the app
         return app
@@ -481,9 +504,9 @@ Move your mouse to any corner of the screen to exit.
             data = {"first_name": first_name, "email": email}
 
             try:
-                _response = requests.post(
+                requests.post(
                     url, json=data
-                )  # Response intentionally unused - fire-and-forget request
+                )  # Fire-and-forget request - response not needed
             except requests.RequestException:
                 pass
 
@@ -533,11 +556,7 @@ def run_async_main():
 if __name__ == "__main__":
     run_async_main()
 
-import sys
-import threading
-
-# Replace the pynput and screeninfo imports with pyautogui
-import pyautogui
+# Mouse tracking functionality (imports moved to top)
 
 # Replace the global variables and functions related to mouse tracking
 exit_flag = False

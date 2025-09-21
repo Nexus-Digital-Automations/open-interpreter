@@ -1,9 +1,4 @@
-from yaspin import yaspin
-
-# Start spinner
-spinner = yaspin()
-spinner.start()
-
+# Standard library imports
 import os
 import platform
 import re
@@ -11,9 +6,19 @@ import subprocess
 import sys
 import time
 
+# Third-party imports
+import litellm
 import platformdirs
 import pyperclip
 import yaml
+from yaspin import yaspin
+
+# Don't let litellm go online here, this slows it down
+os.environ["LITELLM_LOCAL_MODEL_COST_MAP"] = "True"
+
+# Start spinner
+spinner = yaspin()
+spinner.start()
 
 try:
     from pynput.keyboard import Controller, Key
@@ -21,10 +26,6 @@ except ImportError:
     spinner.stop()
     print("Please run `pip install pynput` to use the `wtf` command.")
     exit()
-
-# Don't let litellm go online here, this slows it down
-os.environ["LITELLM_LOCAL_MODEL_COST_MAP"] = "True"
-import litellm
 
 # Define system messages
 SYSTEM_MESSAGE = f"""

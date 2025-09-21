@@ -379,7 +379,6 @@ class ParlantValidationMiddleware(BaseHTTPMiddleware):
         """Analyze request content for risk patterns"""
 
         risk_score = 0.0
-        content_str = json.dumps(body).lower()
 
         # Code execution patterns
         if "code" in body:

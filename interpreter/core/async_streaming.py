@@ -657,7 +657,7 @@ class StreamingValidationService:
                 request = deferred_item["request"]
 
                 # Process validation in background
-                result = await self.parlant_service.validate_operation_optimized(
+                await self.parlant_service.validate_operation_optimized(
                     request
                 )
 

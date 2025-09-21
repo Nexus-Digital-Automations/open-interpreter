@@ -3,25 +3,25 @@ import io
 import os
 import subprocess
 from typing import List
-
 import cv2
 import nltk
 import numpy as np
 import torch
 from PIL import Image, ImageDraw, ImageEnhance, ImageFont
 from sentence_transformers import SentenceTransformer, util
-
 from ...utils.computer_vision import pytesseract_get_text_bounding_boxes
+from nltk.corpus import words
+from ...utils.computer_vision import find_text_in_image
+import timm
+        import random
 
 try:
     nltk.corpus.words.words()
 except LookupError:
     nltk.download("words", quiet=True)
-from nltk.corpus import words
 
 # Create a set of English words
 english_words = set(words.words())
-
 
 def take_screenshot_to_pil(filename="temp_screenshot.png"):
     # Capture the screenshot and save it to a temporary file
@@ -37,16 +37,11 @@ def take_screenshot_to_pil(filename="temp_screenshot.png"):
 
     return image
 
-
-from ...utils.computer_vision import find_text_in_image
-
-
 def point(description, screenshot=None, debug=False, hashes=None):
     if description.startswith('"') and description.endswith('"'):
         return find_text_in_image(description.strip('"'), screenshot, debug)
     else:
         return find_icon(description, screenshot, debug, hashes)
-
 
 def find_icon(description, screenshot=None, debug=False, hashes=None):
     if debug:
@@ -439,16 +434,12 @@ def find_icon(description, screenshot=None, debug=False, hashes=None):
     # Return the top pick icon data
     return coordinates
 
-
 # torch.set_num_threads(4)
 
 fast_model = True
 
 # First, we load the respective CLIP model
 model = SentenceTransformer("clip-ViT-B-32")
-
-
-import timm
 
 if not fast_model:
     # Check if the model file exists
@@ -486,7 +477,6 @@ if not fast_model:
     # images = [Image.open(io.BytesIO(image_bytes1)), Image.open(io.BytesIO(image_bytes2)), ...]
     # embeddings = embed_images(images, model, transforms)
 
-
 if torch.cuda.is_available():
     device = torch.device("cuda")
 elif torch.backends.mps.is_available():
@@ -496,7 +486,6 @@ else:
 
 # Move the model to the specified device
 model = model.to(device)
-
 
 def image_search(query, icons, hashes, debug):
     hashed_icons = [icon for icon in icons if icon["hash"] in hashes]
@@ -543,7 +532,6 @@ def image_search(query, icons, hashes, debug):
 
     # Convert results to original icon format
     return [icons[hit["corpus_id"]] for hit in results]
-
 
 def get_element_boxes(image_data, debug):
     desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")
@@ -645,7 +633,6 @@ def get_element_boxes(image_data, debug):
         return contours_contrasted
 
     if os.getenv("OI_POINT_PERMUTATE", "False") == "True":
-        import random
 
         for _ in range(10):
             random_contrast = random.uniform(

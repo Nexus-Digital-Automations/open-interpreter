@@ -66,7 +66,8 @@ class _BashSession:
             )
         if self._timed_out:
             raise ToolError(
-                f"timed out: bash has not returned in {self._timeout} seconds and must be restarted",
+                f"timed out: bash has not returned in {self._timeout} seconds "
+                f"and must be restarted"
             )
 
         # we know these are not None because we created the process with PIPEs
@@ -97,7 +98,8 @@ class _BashSession:
         except asyncio.TimeoutError:
             self._timed_out = True
             raise ToolError(
-                f"timed out: bash has not returned in {self._timeout} seconds and must be restarted",
+                f"timed out: bash has not returned in {self._timeout} seconds "
+                f"and must be restarted"
             ) from None
 
         if output.endswith("\n"):
@@ -110,8 +112,10 @@ class _BashSession:
             error = error[:-1]
 
         # clear the buffers so that the next output can be read correctly
-        self._process.stdout._buffer.clear()  # pyright: ignore[reportAttributeAccessIssue]
-        self._process.stderr._buffer.clear()  # pyright: ignore[reportAttributeAccessIssue]
+        # pyright: ignore[reportAttributeAccessIssue]
+        self._process.stdout._buffer.clear()
+        # pyright: ignore[reportAttributeAccessIssue]
+        self._process.stderr._buffer.clear()
 
         return CLIResult(output=output, error=error)
 

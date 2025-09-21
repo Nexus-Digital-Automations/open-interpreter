@@ -2,11 +2,13 @@
 EXPERIMENTAL
 """
 
-print("Remember to `pip install open-interpreter[local]`.")
-
+import os
+import platform
 import subprocess
 
 from interpreter import interpreter
+
+print("Remember to `pip install open-interpreter[local]`.")
 
 interpreter.llm.model = "ollama/codestral"
 interpreter.llm.max_tokens = 1000
@@ -233,9 +235,6 @@ interpreter.auto_run = True
 
 # Set offline for all local models
 interpreter.offline = True
-
-import os
-import platform
 
 # Get the current user's login name
 username = os.getlogin()

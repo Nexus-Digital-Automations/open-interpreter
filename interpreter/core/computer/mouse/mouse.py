@@ -1,21 +1,19 @@
 import time
 import warnings
-
 from IPython.display import display
 from PIL import Image
-
 from ...utils.lazy_import import lazy_import
 from ..utils.recipient_utils import format_to_recipient
+import math
 
 # Lazy import of optional packages
 try:
     cv2 = lazy_import("cv2")
-except:
+except ImportError:
     cv2 = None  # Fixes colab error
 np = lazy_import("numpy")
 pyautogui = lazy_import("pyautogui")
 plt = lazy_import("matplotlib.pyplot")
-
 
 class Mouse:
     def __init__(self, computer):
@@ -271,17 +269,12 @@ class Mouse:
         """
         pyautogui.mouseUp()
 
-
-import math
-
-
 def smooth_move_to(x, y, duration=2):
     start_x, start_y = pyautogui.position()
     dx = x - start_x
     dy = y - start_y
-    _distance = math.hypot(
-        dx, dy
-    )  # Distance calculated but intentionally unused - may be used for future speed calculations
+    # Distance could be calculated for future speed calculations if needed:
+    # distance = math.hypot(dx, dy)
 
     start_time = time.time()
 

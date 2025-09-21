@@ -1,7 +1,7 @@
 import sys
 from enum import Enum, auto
 from typing import Set
-
+import requests
 
 class Style(Enum):
     NORMAL = auto()
@@ -10,7 +10,6 @@ class Style(Enum):
     CODE = auto()
     HEADER = auto()
     CODE_BLOCK = auto()
-
 
 class MarkdownStreamer:
     def __init__(self):
@@ -192,9 +191,6 @@ class MarkdownStreamer:
         sys.stdout.write(self.RESET)
         sys.stdout.flush()
 
-
-import requests
-
 # Download a large markdown file to test different styles
 url = "https://raw.githubusercontent.com/matiassingers/awesome-readme/master/readme.md"
 url = (
@@ -210,7 +206,6 @@ print("Hello, world!")
 ```\n"""
     + markdown_text
 )
-
 
 # Initialize it once
 md = MarkdownStreamer()

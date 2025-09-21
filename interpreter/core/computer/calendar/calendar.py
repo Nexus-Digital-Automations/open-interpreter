@@ -102,7 +102,11 @@ class Calendar:
                     end try
 
                     -- Create a record with the detailed information of the event
-                    set eventInfo to {{|summary|:summary of anEvent, |startDate|:start date of anEvent, |endDate|:end date of anEvent, |attendees|:attendeesString, notes:theNotes, |location|:theLocation}}
+                    set eventInfo to {{|summary|:summary of anEvent, ¬
+                        |startDate|:start date of anEvent, ¬
+                        |endDate|:end date of anEvent, ¬
+                        |attendees|:attendeesString, notes:theNotes, ¬
+                        |location|:theLocation}}
                     -- Append this record to the allEventsInfo list
                     set end of allEventsInfo to eventInfo
                 end repeat
@@ -113,7 +117,9 @@ class Calendar:
         if (count of allEventsInfo) > 0 then
             repeat with anEventInfo in allEventsInfo
                 -- Always include Event, Start Date, and End Date
-                set eventOutput to "Event: " & (summary of anEventInfo) & " | Start Date: " & (|startDate| of anEventInfo) & " | End Date: " & (|endDate| of anEventInfo)
+                set eventOutput to "Event: " & (summary of anEventInfo) & ¬
+                    " | Start Date: " & (|startDate| of anEventInfo) & ¬
+                    " | End Date: " & (|endDate| of anEventInfo)
 
                 -- Conditionally include other details if they are not "None"
                 if (attendees of anEventInfo) is not "None" then
@@ -173,9 +179,9 @@ class Calendar:
         if platform.system() != "Darwin":
             return "This method is only supported on MacOS"
 
-        # Format datetime for AppleScript - prepared for future AppleScript integration
-        _applescript_start_date = start_date.strftime("%B %d, %Y %I:%M:%S %p")
-        _applescript_end_date = end_date.strftime("%B %d, %Y %I:%M:%S %p")
+        # Note: For future AppleScript integration, format dates as:
+        # applescript_start_date = start_date.strftime("%B %d, %Y %I:%M:%S %p")
+        # applescript_end_date = end_date.strftime("%B %d, %Y %I:%M:%S %p")
 
         # If there is no calendar, lets use the first calendar applescript returns. This should probably be modified in the future
         if calendar is None:

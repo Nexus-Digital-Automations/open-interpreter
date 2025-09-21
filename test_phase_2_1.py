@@ -22,13 +22,20 @@ Usage:
 Prerequisites:
     pip install pytest httpx asyncio
 """
-
 import asyncio
 import logging
 import sys
 import time
 import traceback
 from datetime import datetime
+    import httpx
+    import pytest
+from interpreter.core.async_core import AsyncInterpreter
+from interpreter.core.enhanced_terminal import EnhancedTerminal, ExecutionResult
+from interpreter.core.job_manager import JobManager, JobStatus
+from interpreter.server import EnhancedInterpreterServer
+            import threading
+            import uvicorn
 
 # Add interpreter to path for imports
 sys.path.insert(
@@ -36,17 +43,10 @@ sys.path.insert(
 )
 
 try:
-    import httpx
-    import pytest
 except ImportError:
     print("Error: Required test dependencies not installed")
     print("Please run: pip install httpx pytest")
     sys.exit(1)
-
-from interpreter.core.async_core import AsyncInterpreter
-from interpreter.core.enhanced_terminal import EnhancedTerminal, ExecutionResult
-from interpreter.core.job_manager import JobManager, JobStatus
-from interpreter.server import EnhancedInterpreterServer
 
 # Configure test logging
 logging.basicConfig(
@@ -54,7 +54,6 @@ logging.basicConfig(
 )
 
 logger = logging.getLogger("test_phase_2_1")
-
 
 class Phase21TestSuite:
     """
@@ -102,9 +101,6 @@ class Phase21TestSuite:
             )
 
             # Start server in background
-            import threading
-
-            import uvicorn
 
             def run_server():
                 uvicorn.run(
@@ -744,9 +740,9 @@ class Phase21TestSuite:
             async with httpx.AsyncClient(timeout=60.0) as client:
                 # Test 5.1: API response times
                 start_time = time.time()
-                _health_response = await client.get(
+                await client.get(
                     f"{self.base_url}/health"
-                )  # Response intentionally unused - only testing response time
+                )  # Only testing response time, not content
                 health_time = time.time() - start_time
 
                 self.test_assert(
@@ -901,7 +897,6 @@ class Phase21TestSuite:
 
         print("=" * 60 + "\n")
 
-
 async def main():
     """
     Main test runner function
@@ -940,7 +935,6 @@ async def main():
     finally:
         # Print results regardless of success/failure
         test_suite.print_test_summary()
-
 
 if __name__ == "__main__":
     # Check if running in pytest

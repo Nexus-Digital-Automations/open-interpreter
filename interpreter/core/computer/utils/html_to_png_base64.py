@@ -4,10 +4,9 @@ import random
 import string
 
 from ....core.utils.lazy_import import lazy_import
+from ....terminal_interface.utils.local_storage_path import get_storage_path
 
 html2image = lazy_import("html2image")
-
-from ....terminal_interface.utils.local_storage_path import get_storage_path
 
 
 def html_to_png_base64(code):

@@ -201,7 +201,7 @@ class TestFileSystemOperations:
 
         with patch(
             "builtins.open", mock_open(read_data=test_content)
-        ) as _mock_file:  # Mock for testing
+        ):
             # Mock file reading
             with patch.object(mock_computer.files, "read") as mock_read:
                 mock_read.return_value = test_content
@@ -215,11 +215,10 @@ class TestFileSystemOperations:
         """Test file editing operations"""
         test_file = computer_test_environment / "edit_test.txt"
         original_content = "Original content"
-        _new_content = "Modified content"  # Intentionally unused - test setup
 
         with patch(
             "builtins.open", mock_open(read_data=original_content)
-        ) as _mock_file:  # Mock for testing
+        ):
             with patch.object(mock_computer.files, "edit") as mock_edit:
                 mock_edit.return_value = True
 
@@ -266,7 +265,7 @@ class TestFileSystemOperations:
         """Test file permissions and access control"""
         test_file = computer_test_environment / "protected_file.txt"
 
-        with patch("os.chmod") as _mock_chmod:  # Mock for testing
+        with patch("os.chmod"):
             with patch.object(mock_computer.files, "set_permissions") as mock_set_perms:
                 mock_set_perms.return_value = True
 

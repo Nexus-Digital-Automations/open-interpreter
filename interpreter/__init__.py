@@ -20,7 +20,7 @@ if "--os" in sys.argv:
             else:
                 try:
                     rich_print(Markdown(line))
-                except UnicodeEncodeError as _e:
+                except UnicodeEncodeError:
                     # Replace the problematic character or handle the error as needed
                     print("Error displaying line:", line)
 
@@ -45,7 +45,8 @@ if "--os" in sys.argv:
 
     if check_for_update():
         print_markdown(
-            "> **A new version of Open Interpreter is available.**\n>Please run: `pip install --upgrade open-interpreter`\n\n---"
+            "> **A new version of Open Interpreter is available.**\n"
+            ">Please run: `pip install --upgrade open-interpreter`\n\n---"
         )
 
     if "--voice" in sys.argv:

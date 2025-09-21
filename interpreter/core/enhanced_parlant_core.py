@@ -194,15 +194,15 @@ class ParlantEnhancedOpenInterpreter(OpenInterpreter):
         try:
             # Apply Parlant validation to chat interaction
             if message:
-                validation_context = {
-                    "interaction_type": "chat",
-                    "message_content": str(message),
-                    "display": display,
-                    "stream": stream,
-                    "security_level": self.security_level.value,
-                }
+                # Note: In production, this would use async validation with context:
+                # validation_context = {
+                #     "interaction_type": "chat",
+                #     "message_content": str(message),
+                #     "display": display,
+                #     "stream": stream,
+                #     "security_level": self.security_level.value,
+                # }
 
-                # Note: In production, this would use async validation
                 # For now, we proceed with enhanced logging
                 self.logger.info("Chat validation passed, proceeding with interaction")
 

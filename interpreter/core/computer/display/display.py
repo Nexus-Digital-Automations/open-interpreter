@@ -7,6 +7,7 @@ from PIL import Image
 
 from ...utils.lazy_import import lazy_import
 from ..utils.recipient_utils import format_to_recipient
+from ..utils.computer_vision import find_text_in_image, pytesseract_get_text
 
 # Still experimenting with this
 # from utils.get_active_window import get_active_window
@@ -14,7 +15,7 @@ from ..utils.recipient_utils import format_to_recipient
 # Lazy import of optional packages
 try:
     cv2 = lazy_import("cv2")
-except:
+except ImportError:
     cv2 = None  # Fixes colab error
 
 pyautogui = lazy_import("pyautogui")
@@ -23,16 +24,13 @@ pyautogui = lazy_import("pyautogui")
 try:
     # Attempt to get the screen size
     pyautogui.size()
-except:
+except Exception:
     pyautogui = None
 
 np = lazy_import("numpy")
 plt = lazy_import("matplotlib.pyplot")
 screeninfo = lazy_import("screeninfo")
 pywinctl = lazy_import("pywinctl")
-
-
-from ..utils.computer_vision import find_text_in_image, pytesseract_get_text
 
 
 class Display:
@@ -230,7 +228,7 @@ class Display:
                 )
 
                 return result
-            except:
+            except Exception:
                 if self.computer.debug:
                     # We want to know these bugs lmao
                     raise

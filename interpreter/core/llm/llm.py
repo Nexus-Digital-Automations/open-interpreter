@@ -1,24 +1,24 @@
-import os
-
-os.environ["LITELLM_LOCAL_MODEL_COST_MAP"] = "True"
-import sys
-
-import litellm
-
-litellm.suppress_debug_info = True
-litellm.REPEATED_STREAMING_CHUNK_LIMIT = 99999999
-
+# Standard library imports
 import logging
+import os
+import sys
 import uuid
 
+# Third-party imports
+import litellm
 import requests
 import tokentrim as tt
 
+# Local imports
 from .run_text_llm import run_text_llm
-
 # from .run_function_calling_llm import run_function_calling_llm
 from .run_tool_calling_llm import run_tool_calling_llm
 from .utils.convert_to_openai_messages import convert_to_openai_messages
+
+# Configure environment and litellm settings
+os.environ["LITELLM_LOCAL_MODEL_COST_MAP"] = "True"
+litellm.suppress_debug_info = True
+litellm.REPEATED_STREAMING_CHUNK_LIMIT = 99999999
 
 # Create or get the logger
 logger = logging.getLogger("LiteLLM")
@@ -127,7 +127,7 @@ class Llm:
                     self.supports_functions = True
                 else:
                     self.supports_functions = False
-            except:
+            except Exception:
                 self.supports_functions = False
 
         # Detect vision support
@@ -137,7 +137,7 @@ class Llm:
                     self.supports_vision = True
                 else:
                     self.supports_vision = False
-            except:
+            except Exception:
                 self.supports_vision = False
 
         # Trim image messages if they're there
@@ -231,7 +231,7 @@ class Llm:
                     messages = tt.trim(
                         messages, system_message=system_message, model=model
                     )
-                except:
+                except Exception:
                     if len(messages) == 1:
                         if self.interpreter.in_terminal_interface:
                             self.interpreter.display_message(
@@ -258,7 +258,7 @@ Continuing...
                     messages = tt.trim(
                         messages, system_message=system_message, max_tokens=8000
                     )
-        except:
+        except Exception:
             # If we're trimming messages, this won't work.
             # If we're trimming from a model we don't know, this won't work.
             # Better not to fail until `messages` is too big, just for frustrations sake, I suppose.
@@ -406,7 +406,7 @@ Continuing...
                     self.max_tokens = min(
                         int(self.context_window * 0.2), model_info["max_output_tokens"]
                     )
-            except:
+            except (KeyError, ValueError, TypeError):
                 pass
 
 

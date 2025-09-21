@@ -3,10 +3,12 @@ import os
 import re
 import traceback
 
-os.environ["LITELLM_LOCAL_MODEL_COST_MAP"] = "True"
 import litellm
 
 from .render_message import render_message
+
+# Configure environment
+os.environ["LITELLM_LOCAL_MODEL_COST_MAP"] = "True"
 
 
 def respond(interpreter):

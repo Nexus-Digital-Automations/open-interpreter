@@ -269,7 +269,7 @@ print(f"Fibonacci(10) = {result}")
             try:
                 mock_interpreter.messages = [response]
                 # Test should handle gracefully without crashing
-                _result = True  # Intentionally unused - test validation
+                pass  # Validation that test completes without exception
             except Exception as e:
                 error_count += 1
                 # Log but don't fail - error handling is expected

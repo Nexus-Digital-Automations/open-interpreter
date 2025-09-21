@@ -2,24 +2,41 @@ import os
 import signal
 import time
 from random import randint
-
 import pytest
-
-#####
 from interpreter import AsyncInterpreter, OpenInterpreter
 from interpreter.terminal_interface.utils.count_tokens import (
+import multiprocessing
+import threading
+from websocket import create_connection
+    import asyncio
+    import json
+    import requests
+    import websockets
+    import asyncio
+    import json
+    import requests
+    import websockets
+    import os
+    import time
+    import sys
+    import json
+        import subprocess
+        import subprocess
+    import pyautogui
+    import requests
+    import threading
+    import time
+    import pywinctl
+import time
+import os
+
+#####
     count_messages_tokens,
     count_tokens,
 )
 
 interpreter = OpenInterpreter()
 #####
-
-import multiprocessing
-import threading
-
-from websocket import create_connection
-
 
 def test_hallucinations():
     # We should be resiliant to common hallucinations.
@@ -70,14 +87,12 @@ def test_hallucinations():
             assert chunk.get("content").strip() == "hello"
             break
 
-
 def run_auth_server():
     os.environ["INTERPRETER_REQUIRE_ACKNOWLEDGE"] = "True"
     os.environ["INTERPRETER_API_KEY"] = "testing"
     async_interpreter = AsyncInterpreter()
     async_interpreter.print = False
     async_interpreter.server.run()
-
 
 # @pytest.mark.skip(reason="Requires uvicorn, which we don't require by default")
 def test_authenticated_acknowledging_breaking_server():
@@ -94,12 +109,6 @@ def test_authenticated_acknowledging_breaking_server():
 
     # Give the server a moment to start
     time.sleep(2)
-
-    import asyncio
-    import json
-
-    import requests
-    import websockets
 
     async def test_fastapi_server():
         async with websockets.connect("ws://localhost:8000/") as websocket:
@@ -221,7 +230,6 @@ def test_authenticated_acknowledging_breaking_server():
         os.kill(process.pid, signal.SIGKILL)  # Send SIGKILL signal
         process.join()
 
-
 def run_server():
     os.environ["INTERPRETER_REQUIRE_ACKNOWLEDGE"] = "False"
     if "INTERPRETER_API_KEY" in os.environ:
@@ -229,7 +237,6 @@ def run_server():
     async_interpreter = AsyncInterpreter()
     async_interpreter.print = False
     async_interpreter.server.run()
-
 
 # @pytest.mark.skip(reason="Requires uvicorn, which we don't require by default")
 def test_server():
@@ -240,12 +247,6 @@ def test_server():
 
     # Give the server a moment to start
     time.sleep(2)
-
-    import asyncio
-    import json
-
-    import requests
-    import websockets
 
     async def test_fastapi_server():
         async with websockets.connect("ws://localhost:8000/") as websocket:
@@ -644,7 +645,6 @@ def test_server():
     os.kill(process.pid, signal.SIGKILL)  # Send SIGKILL signal
     process.join()
 
-
 @pytest.mark.skip(reason="Mac only")
 def test_sms():
     sms = interpreter.computer.sms
@@ -659,10 +659,8 @@ def test_sms():
 
     assert False
 
-
 @pytest.mark.skip(reason="Mac only")
 def test_pytes():
-    import os
 
     desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")
     files_on_desktop = [f for f in os.listdir(desktop_path) if f.endswith(".png")]
@@ -678,10 +676,8 @@ def test_pytes():
 
     assert False
 
-
 def test_ai_chat():
     print(interpreter.computer.ai.chat("hi"))
-
 
 def test_generator():
     """
@@ -766,14 +762,12 @@ def test_generator():
         assert console_output_found, "No console output was found"
         assert active_line_found, "No active line was found"
 
-
 @pytest.mark.skip(reason="Requires open-interpreter[local]")
 def test_localos():
     interpreter.computer.emit_images = False
     interpreter.computer.view()
     interpreter.computer.emit_images = True
     assert False
-
 
 @pytest.mark.skip(reason="Requires open-interpreter[local]")
 def test_m_vision():
@@ -798,10 +792,8 @@ def test_m_vision():
     interpreter.chat(messages)
 
     interpreter.loop = False
-    import time
 
     time.sleep(10)
-
 
 @pytest.mark.skip(reason="Computer with display only + no way to fail test")
 def test_point():
@@ -813,18 +805,14 @@ def test_point():
     interpreter.computer.mouse.move("Spaces:")
     assert False
 
-
 @pytest.mark.skip(reason="Aifs not ready")
 def test_skills():
-    import sys
 
     if sys.version_info[:2] == (3, 12):
         print(
             "skills.search is only for python 3.11 for now, because it depends on unstructured. skipping this test."
         )
         return
-
-    import json
 
     interpreter.llm.model = "gpt-4o-mini"
 
@@ -855,7 +843,6 @@ def test_skills():
         skills = interpreter.computer.skills.search(query)
     except ImportError:
         print("Attempting to install unstructured[all-docs]")
-        import subprocess
 
         subprocess.run(["pip", "install", "unstructured[all-docs]"], check=True)
         skills = interpreter.computer.skills.search(query)
@@ -863,7 +850,6 @@ def test_skills():
     lowercase_skills = [skill[0].lower() + skill[1:] for skill in skills]
     output = "\\n".join(lowercase_skills)
     assert "testing_skilsl" in str(output)
-
 
 @pytest.mark.skip(reason="Local only")
 def test_browser():
@@ -873,7 +859,6 @@ def test_browser():
     )
     assert False
 
-
 @pytest.mark.skip(reason="Computer with display only + no way to fail test")
 def test_display_api():
     start = time.time()
@@ -882,7 +867,6 @@ def test_display_api():
     # assert False
 
     def say(icon_name):
-        import subprocess
 
         subprocess.run(["say", "-v", "Fred", icon_name])
 
@@ -923,8 +907,6 @@ def test_display_api():
     say("1")
     time.sleep(1)
 
-    import pyautogui
-
     pyautogui.mouseDown()
 
     for icon in icons:
@@ -948,7 +930,6 @@ def test_display_api():
     # interpreter.computer.mouse.move(icon="code icon with '>_' in it")
     print(time.time() - start)
     assert False
-
 
 @pytest.mark.skip(reason="Server is not a stable feature")
 def test_websocket_server():
@@ -982,21 +963,15 @@ def test_websocket_server():
 
     ws.close()
 
-
 @pytest.mark.skip(reason="Server is not a stable feature")
 def test_i():
-    import requests
 
     url = "http://localhost:8000/"
     data = "Hello, interpreter! What operating system are you on? Also, what time is it in Seattle?"
     headers = {"Content-Type": "text/plain"}
 
-    import threading
-
     server_thread = threading.Thread(target=interpreter.server)
     server_thread.start()
-
-    import time
 
     time.sleep(3)
 
@@ -1012,11 +987,9 @@ def test_i():
 
     assert full_response != ""
 
-
 def test_async():
     interpreter.chat("Hello!", blocking=False)
     print(interpreter.wait())
-
 
 @pytest.mark.skip(reason="Computer with display only + no way to fail test")
 def test_find_text_api():
@@ -1029,33 +1002,27 @@ def test_find_text_api():
     print(time.time() - start)
     assert False
 
-
 @pytest.mark.skip(reason="Computer with display only + no way to fail test")
 def test_getActiveWindow():
-    import pywinctl
 
     print(pywinctl.getActiveWindow())
     assert False
-
 
 @pytest.mark.skip(reason="Computer with display only + no way to fail test")
 def test_notify():
     interpreter.computer.os.notify("Hello")
     assert False
 
-
 @pytest.mark.skip(reason="Computer with display only + no way to fail test")
 def test_get_text():
     print(interpreter.computer.display.get_text_as_list_of_lists())
     assert False
-
 
 @pytest.mark.skip(reason="Computer with display only + no way to fail test")
 def test_keyboard():
     time.sleep(2)
     interpreter.computer.keyboard.write("Hello " * 50 + "\n" + "hi" * 50)
     assert False
-
 
 @pytest.mark.skip(reason="Computer with display only + no way to fail test")
 def test_get_selected_text():
@@ -1065,14 +1032,12 @@ def test_get_selected_text():
     print(text)
     assert False
 
-
 @pytest.mark.skip(reason="Computer with display only + no way to fail test")
 def test_display_verbose():
     interpreter.computer.verbose = True
     interpreter.verbose = True
     interpreter.computer.mouse.move(x=500, y=500)
     assert False
-
 
 # this function will run before each test
 # we're clearing out the messages Array so we can start fresh and reduce token usage
@@ -1085,7 +1050,6 @@ def setup_function():
     interpreter.llm.max_tokens = 4096
     interpreter.llm.supports_functions = True
     interpreter.verbose = False
-
 
 @pytest.mark.skip(
     reason="Not working consistently, I think GPT related changes? It worked recently"
@@ -1104,17 +1068,14 @@ def test_long_message():
     assert len(interpreter.messages) > 1
     assert "A" in interpreter.messages[-1]["content"]
 
-
 # this function will run after each test
 # we're introducing some sleep to help avoid timeout issues with the OpenAI API
 def teardown_function():
     time.sleep(4)
 
-
 @pytest.mark.skip(reason="Mac only + no way to fail test")
 def test_spotlight():
     interpreter.computer.keyboard.hotkey("command", "space")
-
 
 def test_files():
     messages = [
@@ -1127,7 +1088,6 @@ def test_files():
         },
     ]
     interpreter.chat(messages)
-
 
 @pytest.mark.skip(reason="Only 100 vision calls allowed / day!")
 def test_vision():
@@ -1154,7 +1114,6 @@ def test_vision():
 
     interpreter.loop = False
 
-
 def test_multiple_instances():
     interpreter.system_message = "i"
     agent_1 = OpenInterpreter()
@@ -1166,7 +1125,6 @@ def test_multiple_instances():
     assert agent_1.system_message == "<3"
     assert agent_2.system_message == "u"
 
-
 def test_hello_world():
     hello_world_response = "Hello, World!"
 
@@ -1177,7 +1135,6 @@ def test_hello_world():
     assert messages == [
         {"role": "assistant", "type": "message", "content": hello_world_response}
     ]
-
 
 def test_math():
     # we'll generate random integers between this min and max in our math tests
@@ -1201,15 +1158,12 @@ def test_math():
 
     assert str(round(test_result, 2)) in messages[-1]["content"]
 
-
 def test_break_execution():
     """
     Breaking from the generator while it's executing should halt the operation.
     """
 
     code = r"""print("starting")
-import time
-import os
 
 # Always create a fresh file
 open('numbers.txt', 'w').close()
@@ -1254,18 +1208,15 @@ with open('numbers.txt', 'a+') as f:
     assert "1" in content
     assert "5" not in content
 
-
 def test_delayed_exec():
     interpreter.chat(
         """Can you write a single block of code and execute it that prints something, then delays 1 second, then prints something else? No talk just code, execute the code. Thanks!"""
     )
 
-
 def test_nested_loops_and_multiple_newlines():
     interpreter.chat(
         """Can you write a nested for loop in python and shell and run them? Don't forget to properly format your shell script and use semicolons where necessary. Also put 1-3 newlines between each line in the code. Only generate and execute the code. Yes, execute the code instantly! No explanations. Thanks!"""
     )
-
 
 def test_write_to_file():
     interpreter.chat(
@@ -1278,17 +1229,14 @@ def test_write_to_file():
     )
     assert "Washington" in messages[-1]["content"]
 
-
 def test_markdown():
     interpreter.chat(
         """Hi, can you test out a bunch of markdown features? Try writing a fenced code block, a table, headers, everything. DO NOT write the markdown inside a markdown code block, just write it raw."""
     )
 
-
 def test_reset():
     # make sure that interpreter.reset() clears out the messages Array
     assert interpreter.messages == []
-
 
 def test_token_counter():
     system_tokens = count_tokens(

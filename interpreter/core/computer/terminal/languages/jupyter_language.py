@@ -2,7 +2,6 @@
 This is NOT jupyter language, this is just python.
 Gotta split this out, generalize it, and move all the python additions to python.py, which imports this
 """
-
 import ast
 import os
 import queue
@@ -11,12 +10,14 @@ import sys
 import threading
 import time
 import traceback
-
-os.environ["LITELLM_LOCAL_MODEL_COST_MAP"] = "True"
 import litellm
 from jupyter_client import KernelManager
-
 from ..base_language import BaseLanguage
+    from ipykernel import kernelapp as app
+import matplotlib
+import matplotlib.pyplot as plt
+
+os.environ["LITELLM_LOCAL_MODEL_COST_MAP"] = "True"
 
 DEBUG_MODE = False
 
@@ -26,11 +27,8 @@ if "ipykernel_launcher" in sys.argv:
     if sys.path[0] == "":
         del sys.path[0]
 
-    from ipykernel import kernelapp as app
-
     app.launch_new_instance()
     sys.exit(0)
-
 
 class JupyterLanguage(BaseLanguage):
     file_extension = "py"
@@ -60,14 +58,12 @@ class JupyterLanguage(BaseLanguage):
         backend = "Agg"
 
         code = f"""
-import matplotlib
 matplotlib.use('{backend}')
         """.strip()
 
         # Use Inline actually, it's better I think
         code = """
 %matplotlib inline
-import matplotlib.pyplot as plt
 """.strip()
 
         for _ in self.run(code):
@@ -355,7 +351,6 @@ import matplotlib.pyplot as plt
     def preprocess_code(self, code):
         return preprocess_python(code)
 
-
 def preprocess_python(code):
     """
     Add active line markers
@@ -384,7 +379,6 @@ def preprocess_python(code):
 
     return code
 
-
 def add_active_line_prints(code):
     """
     Add print statements indicating line numbers to a python string.
@@ -408,7 +402,6 @@ def add_active_line_prints(code):
     transformer = AddLinePrints()
     new_tree = transformer.visit(tree)
     return ast.unparse(new_tree)
-
 
 class AddLinePrints(ast.NodeTransformer):
     """
@@ -462,7 +455,6 @@ class AddLinePrints(ast.NodeTransformer):
 
         return new_node
 
-
 def wrap_in_try_except(code):
     # Add import traceback
     code = "import traceback\n" + code
@@ -501,7 +493,6 @@ def wrap_in_try_except(code):
 
     # Convert the modified AST back to source code
     return ast.unparse(parsed_code)
-
 
 def string_to_python(code_as_string):
     parsed_code = ast.parse(code_as_string)

@@ -187,6 +187,20 @@ class Ai:
         return response
 
     def summarize(self, text):
-        query = "You are a highly skilled AI trained in language comprehension and summarization. I would like you to read the following text and summarize it into a concise abstract paragraph. Aim to retain the most important points, providing a coherent and readable summary that could help a person understand the main points of the discussion without needing to read the entire text. Please avoid unnecessary details or tangential points."
-        custom_reduce_query = "You are tasked with taking multiple summarized texts and merging them into one unified and concise summary. Maintain the core essence of the content and provide a clear and comprehensive summary that encapsulates all the main points from the individual summaries."
+        query = (
+            "You are a highly skilled AI trained in language comprehension and "
+            "summarization. I would like you to read the following text and "
+            "summarize it into a concise abstract paragraph. Aim to retain the "
+            "most important points, providing a coherent and readable summary "
+            "that could help a person understand the main points of the "
+            "discussion without needing to read the entire text. Please avoid "
+            "unnecessary details or tangential points."
+        )
+        custom_reduce_query = (
+            "You are tasked with taking multiple summarized texts and merging "
+            "them into one unified and concise summary. Maintain the core "
+            "essence of the content and provide a clear and comprehensive "
+            "summary that encapsulates all the main points from the individual "
+            "summaries."
+        )
         return self.query(text, query, custom_reduce_query)

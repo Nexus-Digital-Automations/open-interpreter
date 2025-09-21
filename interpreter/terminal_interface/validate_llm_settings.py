@@ -6,8 +6,10 @@ I guess it's setting up the model. So maybe this should be like, interpreter.llm
 import os
 import time
 
-os.environ["LITELLM_LOCAL_MODEL_COST_MAP"] = "True"
 from prompt_toolkit import prompt
+
+# Configure environment
+os.environ["LITELLM_LOCAL_MODEL_COST_MAP"] = "True"
 
 
 def validate_llm_settings(interpreter):

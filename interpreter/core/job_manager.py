@@ -317,9 +317,8 @@ class JobManager:
             request: Execution request parameters
         """
         start_time = time.time()
-        _stop_event = self._stop_events.get(
-            job_id
-        )  # Intentionally unused - prepared for future cancellation logic
+        # Note: For future cancellation logic, get stop event:
+        # stop_event = self._stop_events.get(job_id)
 
         try:
             # Prepare execution environment and capture structures

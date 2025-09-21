@@ -1,6 +1,7 @@
 """
 This is an Open Interpreter profile. It configures Open Interpreter to run Anthropic's `Claude 3 Sonnet` using Bedrock.
 """
+from interpreter import interpreter
 
 """
 Recommended pip package:
@@ -13,8 +14,6 @@ os.environ["AWS_REGION_NAME"] = "" # us-east-1, us-east-2, us-west-1, us-west-2
 
 More information can be found here: https://docs.litellm.ai/docs/providers/bedrock
 """
-
-from interpreter import interpreter
 
 interpreter.llm.model = "bedrock/anthropic.claude-3-sonnet-20240229-v1:0"
 

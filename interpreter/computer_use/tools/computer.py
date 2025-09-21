@@ -69,9 +69,8 @@ def smooth_move_to(x, y, duration=1.2):
     start_x, start_y = pyautogui.position()
     dx = x - start_x
     dy = y - start_y
-    _distance = math.hypot(
-        dx, dy
-    )  # Distance calculated but intentionally unused - may be used for future speed calculations
+    # Distance could be calculated for future speed calculations if needed:
+    # distance = math.hypot(dx, dy)
 
     start_time = time.time()
 
@@ -93,7 +92,8 @@ def smooth_move_to(x, y, duration=1.2):
 
 class ComputerTool(BaseAnthropicTool):
     """
-    A tool that allows the agent to interact with the primary monitor's screen, keyboard, and mouse.
+    A tool that allows the agent to interact with the primary monitor's screen,
+    keyboard, and mouse.
     The tool parameters are defined by Anthropic and are not editable.
     """
 

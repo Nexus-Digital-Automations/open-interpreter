@@ -37,7 +37,7 @@ def scan_code(code, language, interpreter):
         # if guarddog solves [#249](https://github.com/DataDog/guarddog/issues/249) we can change this approach a bit
         with yaspin(
             text="  Scanning code..."
-        ).green.right.binary as _loading:  # Intentionally unused - spinner UI
+        ).green.right.binary:
             scan = subprocess.run(
                 f"cd {temp_path} && semgrep scan --config auto --quiet --error {file_name}",
                 shell=True,

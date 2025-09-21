@@ -4,15 +4,15 @@ from ...utils.lazy_import import lazy_import
 np = lazy_import("numpy")
 try:
     cv2 = lazy_import("cv2")
-except:
+except ImportError:
     cv2 = None  # Fixes colab error
 PIL = lazy_import("PIL")
 pytesseract = lazy_import("pytesseract")
 
 
 def pytesseract_get_text(img):
-    # List the attributes of pytesseract, which will trigger lazy loading of it
-    _attributes = dir(pytesseract)  # Intentionally unused - triggers lazy loading
+    # Trigger lazy loading of pytesseract
+    dir(pytesseract)
     if pytesseract is None:
         raise ImportError("The pytesseract module could not be imported.")
 
