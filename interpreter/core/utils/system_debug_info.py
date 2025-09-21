@@ -99,7 +99,7 @@ def interpreter_info(interpreter):
         return f"""
 
         # Interpreter Info
-        
+
         Vision: {interpreter.llm.supports_vision}
         Model: {interpreter.llm.model}
         Function calling: {interpreter.llm.supports_functions}

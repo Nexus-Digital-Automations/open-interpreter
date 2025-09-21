@@ -1,5 +1,5 @@
 def run_text_llm(llm, params):
-    ## Setup
+    # Setup
 
     if llm.execution_instructions:
         try:
@@ -9,7 +9,7 @@ def run_text_llm(llm, params):
             print('params["messages"][0]', params["messages"][0])
             raise
 
-    ## Convert output to LMC format
+    # Convert output to LMC format
 
     inside_code_block = False
     accumulated_block = ""

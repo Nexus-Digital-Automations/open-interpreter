@@ -1,7 +1,7 @@
 # This is a websocket interpreter, TTS and STT disabled.
 # It makes a websocket on a port that sends/receives LMC messages in *streaming* format.
 
-### You MUST send a start and end flag with each message! For example: ###
+# You MUST send a start and end flag with each message! For example: ###
 
 """
 {"role": "user", "type": "message", "start": True})

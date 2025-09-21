@@ -1,5 +1,5 @@
 """
-This is an Open Interpreter profile to use Cerebras. 
+This is an Open Interpreter profile to use Cerebras.
 
 Please set the CEREBRAS_API_KEY environment variable.
 

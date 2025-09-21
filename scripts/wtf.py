@@ -113,18 +113,18 @@ Now, it's your turn:
 
 
 def main():
-    ### GET OPTIONAL CUSTOM MESSAGE
+    # GET OPTIONAL CUSTOM MESSAGE
 
     custom_message = None
     if len(sys.argv) > 1:
         custom_message = "wtf " + " ".join(sys.argv[1:])
 
-    ### GET TERMINAL HISTORY
+    # GET TERMINAL HISTORY
 
     keyboard = Controller()
     history = None
 
-    ## SELECT ALL AND COPY METHOD
+    # SELECT ALL AND COPY METHOD
 
     if True:
         # Save clipboard
@@ -154,7 +154,7 @@ def main():
         # Reset clipboard to stored one
         pyperclip.copy(clipboard)
 
-    ## OCR SCREENSHOT METHOD
+    # OCR SCREENSHOT METHOD
 
     if not history:
         try:
@@ -237,7 +237,7 @@ def main():
             )
             spinner.start()
 
-    ## TERMINAL HISTORY METHOD
+    # TERMINAL HISTORY METHOD
 
     if not history:
         try:
@@ -322,7 +322,7 @@ def main():
         last_wtf_index = history.rindex("wtf")
         history = history[:last_wtf_index]
 
-    ### GET ERROR CONTEXT
+    # GET ERROR CONTEXT
 
     # Regex pattern to extract filename and line number
     pattern = r'File "([^"]+)", line (\d+)'
@@ -360,7 +360,7 @@ def main():
     for entry in result:
         history = f"""File: {entry["filename"]}\n{entry["text"]}\n\n""" + history
 
-    ### PREPARE FOR LLM
+    # PREPARE FOR LLM
 
     # Get LLM model from profile
     default_profile_path = os.path.join(
@@ -417,7 +417,7 @@ def main():
     # print("---")
     # time.sleep(100)
 
-    ### PARSE LLM RESPONSE
+    # PARSE LLM RESPONSE
 
     in_code = False
     backtick_count = 0

@@ -45,7 +45,7 @@ class Os:
                 # Further sanitize the text to avoid errors
                 text = text.encode("unicode_escape").decode("utf-8")
 
-                ## Run directly
+                # Run directly
                 script = f'display notification "{text}" with title "{title}"'
                 subprocess.run(["osascript", "-e", script])
 

@@ -6,7 +6,6 @@ import tempfile
 
 from PIL import Image
 
-
 # transformers = lazy_import("transformers") # Doesn't work for some reason! We import it later.
 
 
@@ -20,9 +19,10 @@ class Vision:
     def load(self, load_moondream=True, load_easyocr=True):
         # print("Loading vision models (Moondream, EasyOCR)...\n")
 
-        with contextlib.redirect_stdout(
-            open(os.devnull, "w")
-        ), contextlib.redirect_stderr(open(os.devnull, "w")):
+        with (
+            contextlib.redirect_stdout(open(os.devnull, "w")),
+            contextlib.redirect_stderr(open(os.devnull, "w")),
+        ):
             if self.easyocr is None and load_easyocr:
                 import easyocr
 

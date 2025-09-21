@@ -448,7 +448,6 @@ fast_model = True
 model = SentenceTransformer("clip-ViT-B-32")
 
 
-
 import timm
 
 if not fast_model:

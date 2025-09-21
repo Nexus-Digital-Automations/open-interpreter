@@ -274,7 +274,7 @@ Continuing...
             if messages[0]["role"] != "system":
                 messages = [{"role": "system", "content": system_message}] + messages
 
-        ## Start forming the request
+        # Start forming the request
 
         params = {
             "model": model,

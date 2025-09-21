@@ -51,11 +51,7 @@ from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
-from .core.async_core import (
-    AsyncInterpreter,
-    JobManager,
-    JobStatus,
-)
+from .core.async_core import AsyncInterpreter, JobManager, JobStatus
 from .core.enhanced_terminal import EnhancedTerminal
 
 # Configure comprehensive logging for the enhanced server

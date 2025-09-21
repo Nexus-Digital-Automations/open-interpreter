@@ -106,7 +106,7 @@ INSTRUCTIONS
 You are creating a new skill. Follow these steps exactly to get me to tell you its name:
 1. Ask me what the name of this skill is.
 2. After I explicitly tell you the name of the skill (I may tell you to proceed which is not the name— if I do say that, you probably need more information from me, so tell me that), after you get the proper name, execute `computer.skills.new_skill.name = "{INSERT THE SKILL NAME FROM QUESTION #1}"`.
-        
+
         """.strip()
         )
 

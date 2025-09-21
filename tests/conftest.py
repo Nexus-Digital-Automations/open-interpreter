@@ -17,11 +17,12 @@ Version: 1.0.0 - Production-Ready Test Configuration
 
 import asyncio
 import os
-import pytest
 import tempfile
 from pathlib import Path
 from typing import Any, Dict
-from unittest.mock import Mock, MagicMock
+from unittest.mock import MagicMock, Mock
+
+import pytest
 
 # Set test environment variables
 os.environ["TESTING"] = "true"

@@ -19,7 +19,7 @@ def respond(interpreter):
     insert_loop_message = False
 
     while True:
-        ## RENDER SYSTEM MESSAGE ##
+        # RENDER SYSTEM MESSAGE ##
 
         system_message = interpreter.system_message
 
@@ -46,9 +46,9 @@ def respond(interpreter):
         #         "python", f"messages={interpreter.messages}"
         #     )
 
-        ## Rendering ↓
+        # Rendering ↓
         rendered_system_message = render_message(interpreter, system_message)
-        ## Rendering ↑
+        # Rendering ↑
 
         rendered_system_message = {
             "role": "system",
@@ -72,7 +72,7 @@ def respond(interpreter):
             yield {"role": "assistant", "type": "message", "content": "\n\n"}
             insert_loop_message = False
 
-        ### RUN THE LLM ###
+        # RUN THE LLM ###
 
         assert (
             len(interpreter.messages) > 0
@@ -125,9 +125,7 @@ def respond(interpreter):
                         """
                     )
 
-                elif (
-                    not interpreter.offline and "not have access" in str(e).lower()
-                ):
+                elif not interpreter.offline and "not have access" in str(e).lower():
                     """
                     Check for invalid model in error message and then fallback.
                     """
@@ -160,7 +158,7 @@ def respond(interpreter):
                 else:
                     raise
 
-        ### RUN CODE (if it's there) ###
+        # RUN CODE (if it's there) ###
 
         if interpreter.messages[-1]["type"] == "code":
             if interpreter.verbose:
@@ -356,12 +354,12 @@ def respond(interpreter):
                     print(str(e))
                     print("Failed to sync iComputer with your Computer. Continuing...")
 
-                ## ↓ CODE IS RUN HERE
+                # ↓ CODE IS RUN HERE
 
                 for line in interpreter.computer.run(language, code, stream=True):
                     yield {"role": "computer", **line}
 
-                ## ↑ CODE IS RUN HERE
+                # ↑ CODE IS RUN HERE
 
                 # sync up your computer with the interpreter's computer
                 try:
@@ -409,7 +407,7 @@ def respond(interpreter):
                 }
 
         else:
-            ## LOOP MESSAGE
+            # LOOP MESSAGE
             # This makes it utter specific phrases if it doesn't want to be told to "Proceed."
 
             loop_message = interpreter.loop_message

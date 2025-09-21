@@ -1,5 +1,5 @@
 """
-This is an Open Interpreter profile to chat with a database. 
+This is an Open Interpreter profile to chat with a database.
 """
 
 import os

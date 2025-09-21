@@ -1,5 +1,7 @@
+import asyncio
 import inspect
 import json
+import logging
 
 from .ai.ai import Ai
 from .browser.browser import Browser
@@ -19,11 +21,28 @@ from .terminal.terminal import Terminal
 from .vision.vision import Vision
 
 
+def get_parlant_service():
+    """Import Parlant service with error handling"""
+    try:
+        from ..parlant_integration import get_parlant_service as _get_parlant_service
+
+        return _get_parlant_service()
+    except ImportError:
+        return None
+
+
 class Computer:
     def __init__(self, interpreter):
         self.interpreter = interpreter
 
         self.terminal = Terminal(self)
+
+        # Parlant Integration for Computer Operations
+        self.parlant_service = get_parlant_service()
+        self.parlant_enabled = (
+            self.parlant_service.PARLANT_ENABLED if self.parlant_service else False
+        )
+        self.logger = logging.getLogger("ParlantValidatedComputer")
 
         self.offline = False
         self.verbose = False
@@ -188,15 +207,150 @@ Do not import the computer module, or any of its sub-modules. They are already i
 
     def run(self, *args, **kwargs):
         """
-        Shortcut for computer.terminal.run
+        Parlant-validated shortcut for computer.terminal.run
+
+        Validates computer automation commands before execution through
+        conversational AI to ensure safety and intent alignment.
         """
+        if self.parlant_enabled and self.parlant_service:
+            # Extract command information
+            command_type = args[0] if args else "unknown"
+            command_params = args[1:] if len(args) > 1 else []
+
+            operation_id = f"computer_run_{id(self)}_{int(__import__('time').time())}"
+
+            self.logger.info(
+                f"[{operation_id}] Validating computer run command",
+                extra={
+                    "command_type": command_type,
+                    "args_count": len(args),
+                    "kwargs_keys": list(kwargs.keys()),
+                },
+            )
+
+            try:
+                # Async validation in sync context
+                loop = asyncio.get_event_loop()
+            except RuntimeError:
+                loop = asyncio.new_event_loop()
+                asyncio.set_event_loop(loop)
+
+            validation_result = loop.run_until_complete(
+                self.parlant_service.validate_computer_automation(
+                    command_type=str(command_type),
+                    parameters={
+                        "args": [str(arg)[:200] for arg in args],
+                        "kwargs": {k: str(v)[:200] for k, v in kwargs.items()},
+                        "interpreter_safe_mode": getattr(
+                            self.interpreter, "safe_mode", "off"
+                        ),
+                        "interpreter_auto_run": getattr(
+                            self.interpreter, "auto_run", False
+                        ),
+                    },
+                )
+            )
+
+            if not validation_result["approved"]:
+                error_msg = f"Computer run blocked by Parlant validation: {validation_result['reasoning']}"
+                self.logger.error(
+                    f"[{operation_id}] {error_msg}",
+                    extra={
+                        "confidence": validation_result["confidence"],
+                        "risk_level": validation_result["risk_level"],
+                        "command_type": command_type,
+                    },
+                )
+                raise PermissionError(error_msg)
+
+            self.logger.info(
+                f"[{operation_id}] Computer run validation approved",
+                extra={
+                    "confidence": validation_result["confidence"],
+                    "risk_level": validation_result["risk_level"],
+                },
+            )
+
+        # Execute original terminal.run
         return self.terminal.run(*args, **kwargs)
 
     def exec(self, code):
         """
-        Shortcut for computer.terminal.run("shell", code)
-        It has hallucinated this.
+        Parlant-validated shortcut for computer.terminal.run("shell", code)
+
+        Validates code execution before running through conversational AI
+        to ensure maximum safety and intent verification. This is the most
+        critical security function in Open-Interpreter.
         """
+        if self.parlant_enabled and self.parlant_service:
+            operation_id = f"computer_exec_{id(self)}_{int(__import__('time').time())}"
+
+            self.logger.info(
+                f"[{operation_id}] Validating code execution",
+                extra={
+                    "code_length": len(code),
+                    "contains_imports": "import " in code,
+                    "contains_system_calls": any(
+                        keyword in code.lower()
+                        for keyword in [
+                            "os.",
+                            "subprocess",
+                            "system",
+                            "exec",
+                            "eval",
+                            "open(",
+                        ]
+                    ),
+                },
+            )
+
+            try:
+                # Async validation in sync context
+                loop = asyncio.get_event_loop()
+            except RuntimeError:
+                loop = asyncio.new_event_loop()
+                asyncio.set_event_loop(loop)
+
+            validation_result = loop.run_until_complete(
+                self.parlant_service.validate_code_execution(
+                    code=code,
+                    language="shell",
+                    execution_context={
+                        "execution_method": "computer.exec",
+                        "interpreter_safe_mode": getattr(
+                            self.interpreter, "safe_mode", "off"
+                        ),
+                        "interpreter_auto_run": getattr(
+                            self.interpreter, "auto_run", False
+                        ),
+                        "interpreter_offline": getattr(
+                            self.interpreter, "offline", False
+                        ),
+                    },
+                )
+            )
+
+            if not validation_result["approved"]:
+                error_msg = f"Code execution blocked by Parlant validation: {validation_result['reasoning']}"
+                self.logger.error(
+                    f"[{operation_id}] {error_msg}",
+                    extra={
+                        "confidence": validation_result["confidence"],
+                        "risk_level": validation_result["risk_level"],
+                        "code_preview": code[:200],
+                    },
+                )
+                raise PermissionError(error_msg)
+
+            self.logger.info(
+                f"[{operation_id}] Code execution validation approved",
+                extra={
+                    "confidence": validation_result["confidence"],
+                    "risk_level": validation_result["risk_level"],
+                },
+            )
+
+        # Execute original terminal.run with shell
         return self.terminal.run("shell", code)
 
     def stop(self):

@@ -18,7 +18,6 @@ Version: 1.0.0 - Production-Ready Test Coverage
 """
 
 import os
-import pytest
 import tempfile
 import time
 import uuid
@@ -26,6 +25,8 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List
 from unittest.mock import Mock, patch
+
+import pytest
 
 # Open Interpreter imports
 from interpreter import OpenInterpreter

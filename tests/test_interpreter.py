@@ -34,9 +34,9 @@ def test_hallucinations():
             assert chunk.get("content") == "22"
             break
 
-    code = """{                                                                             
-    "language": "python",                                                        
-    "code": "10+12"                                                        
+    code = """{
+    "language": "python",
+    "code": "10+12"
   }"""
 
     interpreter.messages = [
@@ -47,9 +47,9 @@ def test_hallucinations():
             assert chunk.get("content") == "22"
             break
 
-    code = """functions.execute({                                                                             
-    "language": "python",                                                        
-    "code": "10+12"                                                        
+    code = """functions.execute({
+    "language": "python",
+    "code": "10+12"
   })"""
 
     interpreter.messages = [
@@ -102,7 +102,6 @@ def test_authenticated_acknowledging_breaking_server():
     import websockets
 
     async def test_fastapi_server():
-
         async with websockets.connect("ws://localhost:8000/") as websocket:
             # Connect to the websocket
             print("Connected to WebSocket")
@@ -249,7 +248,6 @@ def test_server():
     import websockets
 
     async def test_fastapi_server():
-
         async with websockets.connect("ws://localhost:8000/") as websocket:
             # Connect to the websocket
             print("Connected to WebSocket")
@@ -469,7 +467,7 @@ def test_server():
 
             assert "18893094989" in accumulated_content.replace(",", "")
 
-            #### TEST FILE ####
+            # TEST FILE ####
 
             # Send another POST request
             post_url = "http://localhost:8000/settings"
@@ -551,7 +549,7 @@ def test_server():
             )
             assert response.strip(" \n.").lower() == "no"
 
-            #### TEST IMAGES ####
+            # TEST IMAGES ####
 
             # Send another POST request
             post_url = "http://localhost:8000/settings"
@@ -1193,7 +1191,7 @@ def test_math():
 
     order_of_operations_message = f"""
     Please perform the calculation `{n1} + {n2} * ({n1} - {n2}) / ({n2} + {n1})` then reply with just the answer, nothing else. No confirmation. No explanation. No words. Do not use commas. Do not show your work. Just return the result of the calculation. Do not introduce the results with a phrase like \"The result of the calculation is...\" or \"The answer is...\"
-    
+
     Round to 2 decimal places.
     """.strip()
 
@@ -1210,20 +1208,20 @@ def test_break_execution():
     """
 
     code = r"""print("starting")
-import time                                                                                                                                
-import os                                                                                                                                  
-                                                                                                                                            
+import time
+import os
+
 # Always create a fresh file
 open('numbers.txt', 'w').close()
-                                                                                                                                            
-# Open the file in append mode                                                                                                             
-with open('numbers.txt', 'a+') as f:                                                                                                        
-    # Loop through the numbers 1 to 5                                                                                                      
-    for i in [1,2,3,4,5]:                                                                                                                  
-        # Print the number                                                                                                                 
-        print("adding", i, "to file")                                                                                                                           
-        # Append the number to the file                                                                                                    
-        f.write(str(i) + '\n')                                                                                                             
+
+# Open the file in append mode
+with open('numbers.txt', 'a+') as f:
+    # Loop through the numbers 1 to 5
+    for i in [1,2,3,4,5]:
+        # Print the number
+        print("adding", i, "to file")
+        # Append the number to the file
+        f.write(str(i) + '\n')
         # Wait for 0.5 second
         print("starting to sleep")
         time.sleep(1)

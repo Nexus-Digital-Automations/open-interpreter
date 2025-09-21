@@ -21,15 +21,15 @@ Version: 1.0.0 - Production-Ready Async Server Testing
 
 import asyncio
 import json
-import pytest
-import websockets
 from datetime import datetime
 from unittest.mock import AsyncMock, patch
+
+import pytest
+import websockets
 from fastapi.testclient import TestClient
 
 # Open Interpreter imports
-from interpreter.core.async_core import AsyncInterpreter
-from interpreter.core.async_core import Server
+from interpreter.core.async_core import AsyncInterpreter, Server
 
 
 @pytest.fixture

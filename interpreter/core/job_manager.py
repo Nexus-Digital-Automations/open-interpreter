@@ -37,7 +37,6 @@ from typing import Any, Dict, List, Optional
 
 from pydantic import BaseModel
 
-
 # Configure comprehensive logging for job management operations
 logger = logging.getLogger("interpreter.job_manager")
 logger.setLevel(logging.INFO)
@@ -431,8 +430,8 @@ class JobManager:
         Returns:
             List[str]: Absolute paths to discovered generated files
         """
-        import os
         import glob
+        import os
 
         if not working_directory or not os.path.exists(working_directory):
             return []

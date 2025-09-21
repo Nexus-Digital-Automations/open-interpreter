@@ -422,11 +422,11 @@ Use """ to write multi-line messages.
     ):
         setattr(interpreter, "auto_run", False)
 
-    ### Set attributes on interpreter, so that a profile script can read the arguments passed in via the CLI
+    # Set attributes on interpreter, so that a profile script can read the arguments passed in via the CLI
 
     set_attributes(args, arguments)
 
-    ### Apply profile
+    # Apply profile
 
     # Profile shortcuts, which should probably not exist:
 
@@ -472,7 +472,7 @@ Use """ to write multi-line messages.
         args.profile or get_argument_dictionary(arguments, "profile")["default"],
     )
 
-    ### Set attributes on interpreter, because the arguments passed in via the CLI should override profile
+    # Set attributes on interpreter, because the arguments passed in via the CLI should override profile
 
     set_attributes(args, arguments)
     interpreter.disable_telemetry = (
@@ -480,7 +480,7 @@ Use """ to write multi-line messages.
         or args.disable_telemetry
     )
 
-    ### Set some helpful settings we know are likely to be true
+    # Set some helpful settings we know are likely to be true
 
     if interpreter.llm.model == "gpt-4" or interpreter.llm.model == "openai/gpt-4":
         if interpreter.llm.context_window is None:
@@ -514,7 +514,7 @@ Use """ to write multi-line messages.
         if interpreter.llm.supports_functions is None:
             interpreter.llm.supports_functions = True
 
-    ### Check for update
+    # Check for update
 
     try:
         if not interpreter.offline and not args.stdin:

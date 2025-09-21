@@ -392,7 +392,6 @@ class Phase21TestSuite:
 
         try:
             async with httpx.AsyncClient(timeout=30.0) as client:
-
                 # Test 3.1: Health endpoint
                 health_response = await client.get(f"{self.base_url}/health")
 
@@ -571,7 +570,6 @@ class Phase21TestSuite:
 
         try:
             async with httpx.AsyncClient(timeout=60.0) as client:
-
                 # Test 4.1: Multi-language execution
                 test_cases = [
                     {
@@ -744,7 +742,6 @@ class Phase21TestSuite:
 
         try:
             async with httpx.AsyncClient(timeout=60.0) as client:
-
                 # Test 5.1: API response times
                 start_time = time.time()
                 _health_response = await client.get(

@@ -1,5 +1,5 @@
 """
-This is NOT jupyter language, this is just python. 
+This is NOT jupyter language, this is just python.
 Gotta split this out, generalize it, and move all the python additions to python.py, which imports this
 """
 
@@ -93,7 +93,7 @@ import matplotlib.pyplot as plt
         self.last_output_message_time = time.time()
 
         ################################################################
-        ### OFFICIAL OPEN INTERPRETER GOVERNMENT ISSUE SKILL LIBRARY ###
+        # OFFICIAL OPEN INTERPRETER GOVERNMENT ISSUE SKILL LIBRARY ###
         ################################################################
 
         # try:

@@ -22,7 +22,7 @@ function_schema = {
 
 
 def run_function_calling_llm(llm, request_params):
-    ## Setup
+    # Setup
 
     # Add languages OI has access to
     function_schema["parameters"]["properties"]["language"]["enum"] = [
@@ -35,7 +35,7 @@ def run_function_calling_llm(llm, request_params):
     #     "content"
     # ] += "\nUse ONLY the function you have been provided with — 'execute(language, code)'."
 
-    ## Convert output to LMC format
+    # Convert output to LMC format
 
     accumulated_deltas = {}
     language = None

@@ -10,7 +10,6 @@ os.environ["LITELLM_LOCAL_MODEL_COST_MAP"] = "True"
 from prompt_toolkit import prompt
 
 
-
 def validate_llm_settings(interpreter):
     """
     Interactively prompt the user for required LLM settings
@@ -49,7 +48,7 @@ def validate_llm_settings(interpreter):
                     To use `gpt-4o` (recommended) please provide an OpenAI API key.
 
                     To use another language model, run `interpreter --local` or consult the documentation at [docs.openinterpreter.com](https://docs.openinterpreter.com/language-model-setup/).
-                    
+
                     ---
                     """
                     )
@@ -65,11 +64,11 @@ def validate_llm_settings(interpreter):
                     interpreter.display_message(
                         """
 
-                    **Tip:** To save this key for later, run one of the following and then restart your terminal. 
+                    **Tip:** To save this key for later, run one of the following and then restart your terminal.
                     MacOS: `echo 'export OPENAI_API_KEY=your_api_key' >> ~/.zshrc`
                     Linux: `echo 'export OPENAI_API_KEY=your_api_key' >> ~/.bashrc`
                     Windows: `setx OPENAI_API_KEY your_api_key`
-                    
+
                     ---"""
                     )
 

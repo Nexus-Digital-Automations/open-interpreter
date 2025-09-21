@@ -2,6 +2,7 @@
 This file defines the Interpreter class.
 It's the main file. `from interpreter import interpreter` will import an instance of this class.
 """
+
 import json
 import os
 import threading
@@ -16,12 +17,14 @@ from ..terminal_interface.utils.oi_dir import oi_dir
 from .computer.computer import Computer
 from .default_system_message import default_system_message
 from .llm.llm import Llm
+from .parlant_integration import get_parlant_service
+from .parlant_validated_functions import ParlantValidatedOpenInterpreter
 from .respond import respond
 from .utils.telemetry import send_telemetry
 from .utils.truncate_output import truncate_output
 
 
-class OpenInterpreter:
+class OpenInterpreter(ParlantValidatedOpenInterpreter):
     """
     This class (one instance is called an `interpreter`) is the "grand central station" of this project.
 
@@ -138,6 +141,20 @@ class OpenInterpreter:
         self.empty_code_output_template = empty_code_output_template
         self.code_output_sender = code_output_sender
 
+        # Parlant Integration - Initialize conversational AI validation
+        super().__init__()  # Initialize ParlantValidatedOpenInterpreter
+        self.parlant_enabled = get_parlant_service().PARLANT_ENABLED
+        if self.parlant_enabled:
+            self.logger.info(
+                "OpenInterpreter initialized with Parlant conversational AI validation",
+                extra={
+                    "safe_mode": safe_mode,
+                    "auto_run": auto_run,
+                    "offline": offline,
+                    "parlant_service": "active",
+                },
+            )
+
     def local_setup(self):
         """
         Opens a wizard that lets terminal users pick a local model.
@@ -162,6 +179,20 @@ class OpenInterpreter:
         return self.contribute_conversation and not overrides
 
     def chat(self, message=None, display=True, stream=False, blocking=True):
+        # Use Parlant-validated chat if enabled
+        if self.parlant_enabled:
+            import asyncio
+
+            try:
+                loop = asyncio.get_event_loop()
+            except RuntimeError:
+                loop = asyncio.new_event_loop()
+                asyncio.set_event_loop(loop)
+            return loop.run_until_complete(
+                self.parlant_validated_chat(message, display, stream, blocking)
+            )
+
+        # Original chat implementation
         try:
             self.responding = True
             if self.anonymous_telemetry:
@@ -225,7 +256,7 @@ class OpenInterpreter:
 
         # One-off message
         if message or message == "":
-            ## We support multiple formats for the incoming message:
+            # We support multiple formats for the incoming message:
             # Dict (these are passed directly in)
             if isinstance(message, dict):
                 if "role" not in message:

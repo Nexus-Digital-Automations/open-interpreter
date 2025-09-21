@@ -2,7 +2,6 @@
 This is all messed up.... Uses the old streaming structure.
 """
 
-
 from .components.code_block import CodeBlock
 from .components.message_block import MessageBlock
 

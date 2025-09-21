@@ -20,13 +20,8 @@ def validate_server_structure():
     print("🔍 Validating server structure...")
 
     try:
-        from interpreter.server import (
-            # EnhancedInterpreterServer,  # Validation only - import not used
-            # JobResultResponse,  # Validation only - import not used
+        from interpreter.server import (  # EnhancedInterpreterServer,  # Validation only - import not used; JobResultResponse,  # Validation only - import not used; JobExecutionRequest,  # Validation only - import not used; JobStatusResponse,  # Validation only - import not used; ServerHealthResponse,  # Validation only - import not used
             StructuredResultResponse,
-            # JobExecutionRequest,  # Validation only - import not used
-            # JobStatusResponse,  # Validation only - import not used
-            # ServerHealthResponse,  # Validation only - import not used
         )
 
         print("✅ All required classes imported successfully")

@@ -870,7 +870,7 @@ def create_router(async_interpreter):
                         """
             + (
                 """
-                        
+
                         // Acknowledge receipt
                         var acknowledge_message = {
                             "ack": eventData.id
@@ -1336,7 +1336,7 @@ def create_router(async_interpreter):
             except Exception as e:
                 return {"error": str(e)}, 500
 
-    ### OPENAI COMPATIBLE ENDPOINT
+    # OPENAI COMPATIBLE ENDPOINT
 
     class ChatMessage(BaseModel):
         role: str
@@ -1398,10 +1398,7 @@ def create_router(async_interpreter):
                 await asyncio.sleep(0)  # Yield control to the event loop
                 made_chunk = True
 
-                if (
-                    chunk["type"] == "confirmation"
-                    and not async_interpreter.auto_run
-                ):
+                if chunk["type"] == "confirmation" and not async_interpreter.auto_run:
                     await asyncio.sleep(0)
                     output_content = "Do you want to run this code?"
                     output_chunk = {

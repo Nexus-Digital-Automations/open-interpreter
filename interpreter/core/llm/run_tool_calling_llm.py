@@ -99,7 +99,7 @@ def process_messages(messages):
 
 
 def run_tool_calling_llm(llm, request_params):
-    ## Setup
+    # Setup
 
     # Add languages OI has access to
     tool_schema["function"]["parameters"]["properties"]["language"]["enum"] = [
@@ -165,7 +165,7 @@ def run_tool_calling_llm(llm, request_params):
     #     "content"
     # ] += "\nUse ONLY the function you have been provided with — 'execute(language, code)'."
 
-    ## Convert output to LMC format
+    # Convert output to LMC format
 
     accumulated_deltas = {}
     language = None

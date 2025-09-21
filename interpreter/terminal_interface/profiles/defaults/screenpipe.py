@@ -25,12 +25,12 @@ from urllib.parse import quote
 
 def search_screenpipe(query, limit=5, start_time=None, end_time=None):
     base_url = f"http://localhost:3030/search?q={quote(query)}&content_type=ocr&limit={limit}"
-    
+
     if start_time:
         base_url += f"&start_time={quote(start_time)}"
     if end_time:
         base_url += f"&end_time={quote(end_time)}"
-    
+
     response = requests.get(base_url)
     if response.status_code == 200:
         data = response.json()
@@ -95,5 +95,5 @@ for result in results:
     print(f"Timestamp: {{result['content']['timestamp']}}")
 ```
 
-Write valid code. 
+Write valid code.
 """

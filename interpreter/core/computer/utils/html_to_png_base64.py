@@ -3,7 +3,6 @@ import os
 import random
 import string
 
-
 from ....core.utils.lazy_import import lazy_import
 
 html2image = lazy_import("html2image")

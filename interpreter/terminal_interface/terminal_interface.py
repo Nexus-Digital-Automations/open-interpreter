@@ -91,7 +91,7 @@ def terminal_interface(interpreter, message):
                 message = interpreter.messages[-1]["content"]
                 interpreter.messages = interpreter.messages[:-1]
             else:
-                ### This is the primary input for Open Interpreter.
+                # This is the primary input for Open Interpreter.
                 try:
                     message = (
                         cli_input("> ").strip()
@@ -139,7 +139,7 @@ def terminal_interface(interpreter, message):
                 # Is the input a path to an image? Like they just dragged it into the terminal?
                 image_path = find_image_path(message)
 
-                ## If we found an image, add it to the message
+                # If we found an image, add it to the message
                 if image_path:
                     # Add the text interpreter's message history
                     interpreter.messages.append(
