@@ -601,7 +601,7 @@ class TestToolChainCoordination:
                 try:
                     mock_computer.files.create("test.py", "invalid_code(")
                     create_success = True
-                except:
+                except Exception:
                     create_success = False
 
                 try:

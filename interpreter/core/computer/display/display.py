@@ -284,7 +284,7 @@ class Display:
                 )
                 response = response.json()
                 return response
-            except:
+            except (requests.RequestException, ValueError, KeyError):
                 print("Attempting to find the text locally.")
 
         # We'll only get here if 1) self.computer.offline = True, or the API failed
@@ -316,14 +316,14 @@ class Display:
                 )
                 response = response.json()
                 return response
-            except:
+            except (requests.RequestException, ValueError, KeyError):
                 print("Attempting to get the text locally.")
 
         # We'll only get here if 1) self.computer.offline = True, or the API failed
 
         try:
             return pytesseract_get_text(screenshot)
-        except:
+        except Exception:
             raise Exception(
                 "Failed to find text locally.\n\nTo find text in order to use the mouse, please make sure you've installed `pytesseract` along with the Tesseract executable (see this Stack Overflow answer for help installing Tesseract: https://stackoverflow.com/questions/50951955/pytesseract-tesseractnotfound-error-tesseract-is-not-installed-or-its-not-i)."
             )

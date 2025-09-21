@@ -897,10 +897,10 @@ print(f"EXECUTION_METADATA:{{'success': {exit_code == 0}, 'time': {execution_tim
             try:
                 self.process.terminate()
                 self.process.wait(timeout=5)
-            except:
+            except Exception:
                 try:
                     self.process.kill()
-                except:
+                except Exception:
                     pass
 
         if self.temp_dir and os.path.exists(self.temp_dir):
