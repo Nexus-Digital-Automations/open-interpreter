@@ -45,6 +45,7 @@ sys.path.insert(
 )
 
 try:
+    pass  # Required imports are already handled above
 except ImportError:
     print("Error: Required test dependencies not installed")
     print("Please run: pip install httpx pytest")

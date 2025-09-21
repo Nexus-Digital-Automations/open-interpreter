@@ -6,25 +6,9 @@ from random import randint
 import pytest
 
 from interpreter import AsyncInterpreter, OpenInterpreter
-from interpreter.terminal_interface.utils.count_tokens import (  # ####
-    asyncio,
+from interpreter.terminal_interface.utils.count_tokens import (
     count_messages_tokens,
     count_tokens,
-    create_connection,
-    from,
-    import,
-    json,
-    multiprocessing,
-    os,
-    pyautogui,
-    pywinctl,
-    requests,
-    subprocess,
-    sys,
-    threading,
-    time,
-    websocket,
-    websockets,
 )
 
 interpreter = OpenInterpreter()
