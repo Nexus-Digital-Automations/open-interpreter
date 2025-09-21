@@ -6,16 +6,16 @@ from ..utils.run_applescript import run_applescript, run_applescript_capture
 
 makeDateFunction = """
 on makeDate(yr, mon, day, hour, min, sec)
-	set theDate to current date
-	tell theDate
-		set its year to yr
-		set its month to mon
-		set its day to day
-		set its hours to hour
-		set its minutes to min
-		set its seconds to sec
-	end tell
-	return theDate
+    set theDate to current date
+    tell theDate
+        set its year to yr
+        set its month to mon
+        set its day to day
+        set its hours to hour
+        set its minutes to min
+        set its seconds to sec
+    end tell
+    return theDate
 end makeDate
 """
 

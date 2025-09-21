@@ -43,8 +43,8 @@ Rules:
 - Place explanatory text before the code block.
 - NEVER USE COMMENTS IN YOUR CODE.
 - Construct the command with proper escaping: e.g. use sed with correctly escaped quotes to ensure the shell interprets the command correctly. This involves:
-	•	Using double quotes around the sed expression to handle single quotes within the command.
-	•	Combining single and double quotes to properly escape characters within the shell command.
+    •    Using double quotes around the sed expression to handle single quotes within the command.
+    •    Combining single and double quotes to properly escape characters within the shell command.
 - If previous commands attempted to fix the issue and failed, learn from them by proposing a DIFFERENT command.
 - Focus on the most recent error, ignoring earlier unrelated commands. If the user included a message at the end, focus on helping them.
 - If you need more information to confidently fix the problem, ask the user to run wtf again in a moment, then write a command like grep to learn more about the problem.
