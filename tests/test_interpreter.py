@@ -1,9 +1,29 @@
+import asyncio
+import json
+import multiprocessing
 import os
 import signal
+import subprocess
+import sys
+import threading
 import time
 from random import randint
 
 import pytest
+import requests
+import websockets
+from websocket import create_connection
+
+# Optional imports for GUI testing
+try:
+    import pyautogui
+except ImportError:
+    pyautogui = None
+
+try:
+    import pywinctl
+except ImportError:
+    pywinctl = None
 
 from interpreter import AsyncInterpreter, OpenInterpreter
 from interpreter.terminal_interface.utils.count_tokens import (
@@ -153,7 +173,7 @@ def test_authenticated_acknowledging_breaking_server():
                     raise (
                         Exception(
                             "It shouldn't have finished this soon, accumulated_content is: "
-                            + accumulated_content
+                            + poem
                         )
                     )
 
