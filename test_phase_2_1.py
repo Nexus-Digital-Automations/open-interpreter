@@ -849,7 +849,7 @@ class Phase21TestSuite:
                     try:
                         # Attempt to cancel job (may fail if already completed)
                         await client.post(f"{self.base_url}/jobs/{job_id}/cancel")
-                    except:
+                    except Exception:
                         pass  # Ignore cleanup errors
         except Exception as e:
             logger.warning(f"Job cleanup encountered errors: {str(e)}")

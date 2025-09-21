@@ -162,7 +162,7 @@ def test_authenticated_acknowledging_breaking_server():
                 if "error" in message_data:
                     raise Exception(str(message_data))
                 print("Received from WebSocket:", message_data)
-                if type(message_data.get("content")) == str:
+                if isinstance(message_data.get("content"), str):
                     poem += message_data.get("content")
                     print(message_data.get("content"), end="", flush=True)
                 if message_data == {
@@ -207,7 +207,7 @@ def test_authenticated_acknowledging_breaking_server():
                     "content": "complete",
                 }:
                     break
-                if type(message_data.get("content")) == str:
+                if isinstance(message_data.get("content"), str):
                     poem += message_data.get("content")
                     print(message_data.get("content"), end="", flush=True)
 
@@ -296,7 +296,7 @@ def test_server():
                 if "error" in message_data:
                     raise Exception(message_data["content"])
                 print("Received from WebSocket:", message_data)
-                if type(message_data.get("content")) == str:
+                if isinstance(message_data.get("content"), str):
                     accumulated_content += message_data.get("content")
                 if message_data == {
                     "role": "server",
@@ -452,7 +452,7 @@ def test_server():
                     raise Exception(message_data["content"])
                 print("Received from WebSocket:", message_data)
                 if message_data.get("content"):
-                    if type(message_data.get("content")) == str:
+                    if isinstance(message_data.get("content"), str):
                         accumulated_content += message_data.get("content")
                 if message_data == {
                     "role": "server",
@@ -522,7 +522,7 @@ def test_server():
                 if "error" in message_data:
                     raise Exception(message_data["content"])
                 print("Received from WebSocket:", message_data)
-                if type(message_data.get("content")) == str:
+                if isinstance(message_data.get("content"), str):
                     accumulated_content += message_data.get("content")
                 if message_data == {
                     "role": "server",
@@ -599,7 +599,7 @@ def test_server():
                 if "error" in message_data:
                     raise Exception(message_data["content"])
                 print("Received from WebSocket:", message_data)
-                if type(message_data.get("content")) == str:
+                if isinstance(message_data.get("content"), str):
                     accumulated_content += message_data.get("content")
                 if message_data == {
                     "role": "server",

@@ -150,12 +150,26 @@
       "updated_at": "2025-09-21T18:03:52.667Z"
     },
     {
-      "status": "pending",
+      "status": "completed",
       "created_at": "2025-09-21T21:53:23.149Z",
       "title": "Fix isort import sorting and black formatting in interpreter/core/respond.py",
       "description": "Fix isort import sorting violation and black formatting issues in interpreter/core/respond.py. Run isort --fix and black formatting to achieve perfect formatting compliance.",
       "category": "error",
-      "id": "error_1758491603149_lazv10novel"
+      "id": "error_1758491603149_lazv10novel",
+      "assigned_agent": "dev_session_1758491586152_1_general_d786c7f3",
+      "started_at": "2025-09-21T21:56:32.200Z",
+      "claimed_by": "dev_session_1758491586152_1_general_d786c7f3",
+      "agent_assignment_history": [
+        {
+          "agentId": "dev_session_1758491586152_1_general_d786c7f3",
+          "role": "primary",
+          "assignedAt": "2025-09-21T21:56:32.200Z",
+          "reassignReason": null,
+          "claimPriority": "normal"
+        }
+      ],
+      "completed_at": "2025-09-21T21:56:53.101Z",
+      "updated_at": "2025-09-21T21:56:53.101Z"
     },
     {
       "status": "completed",
@@ -178,12 +192,14 @@
       "updated_at": "2025-09-21T21:54:26.247Z"
     },
     {
-      "status": "pending",
+      "status": "completed",
       "created_at": "2025-09-21T21:53:28.842Z",
       "title": "Fix E741 ambiguous-variable-name and F821 undefined-name errors in open-interpreter",
       "description": "Identify and fix 1 E741 ambiguous variable name error and 1 F821 undefined name error in the open-interpreter package. Focus on descriptive variable names and proper imports/definitions to achieve zero naming violations.",
       "category": "error",
-      "id": "error_1758491608842_b6wf0o3xsd8"
+      "id": "error_1758491608842_b6wf0o3xsd8",
+      "completed_at": "2025-09-21T21:57:22.410Z",
+      "updated_at": "2025-09-21T21:57:22.410Z"
     }
   ],
   "agents": {
